@@ -1,0 +1,70 @@
+# Carpetas generadas automáticamente
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Uu]serSettings/
+[Mm]emoryCaptures/
+[Ll]ogs/
+
+# Plastic SCM
+/Assets/Plugins/PlasticSCM*
+/assets/plugins/PlasticSCM*
+
+# Unity Asset Store tools
+**/Assets/AssetStoreTools
+**/assets/assetstoretools
+
+# Archivos privados y de configuración del editor
+*.private
+*.private.meta
+^*.private.[0-9]+$
+^*.private.[0-9]+.meta$
+
+# Archivos de sistema y configuración
+.vs/
+.vscode/
+.idea/
+.gradle/
+ExportedObj/
+.consulo/
+
+# Archivos de proyecto C#
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Archivos temporales y del sistema operativo
+sysinfo.txt
+crashlytics-build.properties
+*.apk
+*.aab
+*.app
+*.unitypackage
+~UnityDirMonSyncFile~*
+
+# Addressables y StreamingAssets
+**/Assets/AddressableAssetsData/*/*.bin*
+**/assets/addressableassetsdata/*/*.bin*
+**/Assets/StreamingAssets/aa.meta
+**/assets/streamingassets/*/aa/*
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini

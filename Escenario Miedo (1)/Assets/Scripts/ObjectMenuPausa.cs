@@ -7,6 +7,8 @@ public class ObjectMenuPausa : MonoBehaviour
     public bool Pausa;
     private AudioSource musica;
     private CameraShake cameraShake;
+
+    public bool isMute = false;
     
     void Start()
     {
@@ -68,5 +70,19 @@ public class ObjectMenuPausa : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuPrincipal");
+    }
+
+    public void Mutear()
+    {
+        if (isMute)
+        {
+            musica.Play();
+            isMute = false;
+        }
+        else 
+        {
+            musica.Pause();
+            isMute = true;
+        }
     }
 }

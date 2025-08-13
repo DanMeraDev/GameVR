@@ -1,25 +1,38 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Script_PortalTerror : MonoBehaviour
 {
-    public SceneAsset SelectedScene;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+#if UNITY_EDITOR
+    [SerializeField] private SceneAsset selectedScene;
+#endif
+
+    [SerializeField] private string sceneName = "Warproom";
+
+#if UNITY_EDITOR
+    // Esto actualiza el nombre de la escena cuando cambias el SceneAsset desde el editor
+    private void OnValidate()
     {
-        
+        if (selectedScene != null)
+        {
+            sceneName = selectedScene.name;
+        }
     }
+#endif
 
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(SelectedScene.name);
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("No se ha asignado un nombre de escena válido.");
+        }
     }
 }

@@ -1,0 +1,2 @@
+D:\Repos2025\Funcional\GameVR\Escenario Miedo (1)\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+D:\Repos2025\Funcional\GameVR\Escenario Miedo (1)\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

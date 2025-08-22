@@ -5,8 +5,7 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
     [Header("Targets")]
     public Transform patrolPoint1;
     public Transform patrolPoint2;
-    public Transform player;
-    [Tooltip("Arrastra aquí la Cámara Principal (Main Camera) del jugador de VR.")]
+    [Tooltip("Arrastra aquí la Cámara Principal (OVRHmd) del jugador de VR.")]
     public Transform playerHead;
 
     [Header("Detection")]
@@ -78,9 +77,11 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
             SetCameraShake(false);
         }
 
-        if (player != null)
+        if (playerHead != null)
         {
-            UpdateAudioVolume(Vector3.Distance(transform.position, player.position));
+            Vector3 enemyPosOnPlane = new Vector3(transform.position.x, 0, transform.position.z);
+            Vector3 playerPosOnPlane = new Vector3(playerHead.position.x, 0, playerHead.position.z);
+            UpdateAudioVolume(Vector3.Distance(enemyPosOnPlane, playerPosOnPlane));
         }
     }
 
@@ -94,10 +95,15 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
 
         if (chasingPlayer)
         {
-            MoveTowardsTarget(player, chaseSpeed);
+            // El objetivo de persecución es la posición de la cabeza del jugador, proyectada en el suelo.
+            Vector3 chasePosition = new Vector3(playerHead.position.x, transform.position.y, playerHead.position.z);
+            MoveTowardsPosition(chasePosition, chaseSpeed);
         }
-        else
+        else // Lógica de Patrulla
         {
+            Vector3 patrolTargetPosition = currentTarget.position;
+            MoveTowardsPosition(patrolTargetPosition, patrolSpeed);
+
             Vector3 positionOnPlane = new Vector3(transform.position.x, 0, transform.position.z);
             Vector3 targetOnPlane = new Vector3(currentTarget.position.x, 0, currentTarget.position.z);
             if (Vector3.Distance(positionOnPlane, targetOnPlane) < 1.0f)
@@ -105,50 +111,36 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
                 rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
                 currentTarget = (currentTarget == patrolPoint1) ? patrolPoint2 : patrolPoint1;
             }
-            else
-            {
-                MoveTowardsTarget(currentTarget, patrolSpeed);
-            }
         }
     }
 
     private bool CanSeePlayer()
     {
-        if (player == null || playerHead == null) return false;
+        if (playerHead == null) return false;
 
-        // 1. Comprobación de Distancia
-        if (Vector3.Distance(transform.position, player.position) > visionRange)
-        {
-            return false;
-        }
+        // 1. Comprobación de Distancia (horizontal)
+        Vector3 enemyPosOnPlane = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 playerPosOnPlane = new Vector3(playerHead.position.x, 0, playerHead.position.z);
+        if (Vector3.Distance(enemyPosOnPlane, playerPosOnPlane) > visionRange) return false;
 
         // 2. Comprobación de Ángulo (Cono de Visión)
-        Vector3 directionToPlayerHead = (playerHead.position - transform.position).normalized;
-        if (Vector3.Angle(transform.forward, directionToPlayerHead) > visionAngle / 2)
-        {
-            return false;
-        }
+        Vector3 directionToPlayerHead = (playerHead.position - (transform.position + Vector3.up)).normalized;
+        if (Vector3.Angle(transform.forward, directionToPlayerHead) > visionAngle / 2) return false;
 
         // 3. Comprobación de Obstáculos (Línea de Visión)
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up, directionToPlayerHead, out hit, visionRange))
         {
-            if (hit.collider.transform.root.CompareTag("Player"))
-            {
-                return true;
-            }
+            if (hit.collider.transform.root.CompareTag("Player")) return true;
             return false;
         }
         
-        // Si el rayo no chocó con NADA, el camino está despejado.
         return true;
     }
 
-    void MoveTowardsTarget(Transform target, float speed)
+    void MoveTowardsPosition(Vector3 targetPosition, float speed)
     {
-        if (target == null) return;
-
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = targetPosition - transform.position;
         direction.y = 0;
 
         if (direction.sqrMagnitude > 0.001f)
@@ -175,8 +167,8 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
 
     void SetCameraShake(bool state)
     {
-        if (player == null) return;
-        CameraShake cameraShake = player.GetComponentInChildren<CameraShake>();
+        if (playerHead == null) return;
+        CameraShake cameraShake = playerHead.root.GetComponentInChildren<CameraShake>();
         if (cameraShake != null)
         {
             cameraShake.SetShake(state);
@@ -192,7 +184,7 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (player == null) return;
+        if (playerHead == null) return;
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, visionRange);
@@ -203,28 +195,26 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
         Gizmos.DrawRay(transform.position, fovLine1);
         Gizmos.DrawRay(transform.position, fovLine2);
 
-        if (playerHead != null)
+        Vector3 eyePosition = transform.position + Vector3.up;
+        Vector3 directionToPlayerHead = playerHead.position - eyePosition;
+        RaycastHit hit;
+        if (Physics.Raycast(eyePosition, directionToPlayerHead, out hit, visionRange))
         {
-            Vector3 directionToPlayerHead = playerHead.position - (transform.position + Vector3.up);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up, directionToPlayerHead, out hit, visionRange))
+            if(hit.collider.transform.root.CompareTag("Player"))
             {
-                if(hit.collider.transform.root.CompareTag("Player"))
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawLine(transform.position + Vector3.up, hit.point);
-                }
-                else
-                {
-                    Gizmos.color = Color.magenta;
-                    Gizmos.DrawLine(transform.position + Vector3.up, hit.point);
-                }
+                Gizmos.color = Color.red; // Ve al jugador
+                Gizmos.DrawLine(eyePosition, hit.point);
             }
             else
             {
-                 Gizmos.color = Color.green;
-                 Gizmos.DrawLine(transform.position + Vector3.up, playerHead.position);
+                Gizmos.color = Color.magenta; // Choca con una pared
+                Gizmos.DrawLine(eyePosition, hit.point);
             }
+        }
+        else
+        {
+             Gizmos.color = Color.green; // Camino despejado
+             Gizmos.DrawLine(eyePosition, eyePosition + directionToPlayerHead.normalized * visionRange);
         }
     }
 }

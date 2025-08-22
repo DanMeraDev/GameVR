@@ -317,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectoMenuPausa: {fileID: 6621177837507428461}
   Pausa: 1
+  isMute: 0
 --- !u!1 &4144398134325984446
 GameObject:
   m_ObjectHideFlags: 0

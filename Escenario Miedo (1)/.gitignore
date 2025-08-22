@@ -11,6 +11,7 @@
 # Plastic SCM
 /Assets/Plugins/PlasticSCM*
 /assets/plugins/PlasticSCM*
+.plastic/
 
 # Unity Asset Store tools
 **/Assets/AssetStoreTools

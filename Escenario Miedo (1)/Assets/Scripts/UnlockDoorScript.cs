@@ -1,76 +1,55 @@
-
-using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using static Unity.VisualScripting.Member;
+﻿using UnityEngine;
 using System.Collections;
 
 public class UnlockDoorScript : MonoBehaviour
 {
-    //Declaracion de objetos 
     public GameObject OculusController;
+    public Rigidbody jointRigidBody;
     public string keyName = "keyLudo";
     public AudioClip wrongSound;
     public AudioClip rigthSound;
-    public Light signalLigth;
-    AudioSource source;
-    public bool isFlickering = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private AudioSource source;
+    public LedIndicator ledIndicator;
+    public bool doorLock = true;
+
     void Start()
     {
-        //Inicializacion del AudioSource como componente del game object padre
+        // Inicializar el AudioSource
         source = gameObject.AddComponent<AudioSource>();
         source.playOnAwake = false;
-        //asigancion de un  clip temporal
         source.clip = rigthSound;
+
     }
 
-    //Logica de colici�n en trigger
+  
     private void OnTriggerEnter(Collider other)
     {
- 
-        if (other.tag =="Key")
+        
+        if (other.CompareTag("Key") && doorLock)
         {
-          
             if (other.name == keyName)
             {
+                // Llave correcta → LED verde fijo
                 source.clip = rigthSound;
                 OculusController.SetActive(true);
+                jointRigidBody.isKinematic = false;
                 source.Play();
-                signalLigth.color = Color.green;
+                ledIndicator.SetLedColor(Color.green);
+                doorLock=false;
             }
-            else 
+            else
             {
+                // Llave incorrecta → empieza a titilar en rojo
                 source.clip = wrongSound;
+                ledIndicator.SetLedColor(Color.red);
+                
                 source.Play();
-                isFlickering = true;
-                StartCoroutine(FlickerForSeconds());
+                ledIndicator.startFlick();
+
+
 
             }
-
-
         }
     }
 
-    IEnumerator FlickerForSeconds()
-    {
-    float minIntensity = 0f;
-     float maxIntensity = 1f;
-     float flickerSpeed = 2f;
-     float flickerDuration = 5f;
-     float finalIntensity = 10f;
-
-        
-        float startTime = Time.time;
-        while (Time.time - startTime < flickerDuration)
-        {
-            float noise = Mathf.PerlinNoise(Time.time * flickerSpeed, 0.0f);
-            signalLigth.intensity = Mathf.Lerp(minIntensity, maxIntensity, noise);
-            yield return null;
-        }
-
-        // Estabiliza la luz
-        signalLigth.intensity = finalIntensity;
-        isFlickering = false;
-    }
 }
-

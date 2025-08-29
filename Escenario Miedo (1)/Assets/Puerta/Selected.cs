@@ -91,7 +91,8 @@ public class Selected : MonoBehaviour
             SoltarObjeto();
 
         if (isHoldingFlashlight && Input.GetKeyDown(KeyCode.F))
-            linternaFlashlight.ToggleLight();
+        { 
+        }
     }
 
     void RecogerObjeto(GameObject objeto)

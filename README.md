@@ -1,7 +1,7 @@
 # GameVR
 Juego de exploración sensorial
 
-#Configuracion
+## Configuracion
 * Instalar las herramientas de META XR del asset store (Meta XR All-in-One SDK)
 * Poner el modo de build en android asegurando un API mayor o igual a la 32
 * Instalar Meta quest link
@@ -12,5 +12,8 @@ Juego de exploración sensorial
 Para usarlo, descarga el asset desde Unity Asset Store y cárgalo en la carpeta:
 Assets/Real Stars Skybox/
 
-#Consideraciones
+### Uso de avatars
+* Descargar las herramientas de Meta Avatars SDK. [Enlace a la Asset Store](https://assetstore.unity.com/packages/tools/integration/meta-avatars-sdk-271958) 
+
+## Consideraciones
 Aun no es necesario activar la particion del aplicativo en binarios obb o data.

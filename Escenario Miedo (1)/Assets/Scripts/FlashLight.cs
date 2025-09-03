@@ -1,6 +1,5 @@
 using UnityEngine;
 using Oculus.Interaction;
-using Unity.VisualScripting;
 public class FlashLight : MonoBehaviour
 {
     [Header("Linterna")]
@@ -8,30 +7,13 @@ public class FlashLight : MonoBehaviour
     public float batteryLife = 200f;
     public float batteryDrainRate = 2.2f;
     public float maxBattery = 300f;
-    public AudioClip onOffSound;
-    private GameObject ligthCone;
 
-    private AudioSource onOffAudioSource;
     private bool luzEncendida = false;
     private Grabbable grabbable;
 
     void Awake()
     {
         grabbable = GetComponent<Grabbable>();
-        onOffAudioSource = this.AddComponent<AudioSource>();
-        onOffAudioSource.clip = onOffSound;
-        onOffAudioSource.loop = false;
-        Transform childCone = this.transform.Find("Cone");
-        if (childCone != null)
-        {
-            ligthCone = childCone.gameObject;
-            Debug.Log("Encontré al hijo: " + ligthCone.name);
-            ligthCone.gameObject.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("No se encontró el hijo.");
-        }
     }
 
     void Start()
@@ -71,18 +53,14 @@ public class FlashLight : MonoBehaviour
         if (batteryLife > 0)
         {
             luzEncendida = true;
-            ligthCone.gameObject.SetActive(true);
             linternaLuz.enabled = true;
-            onOffAudioSource.Play();
         }
     }
 
     private void ApagarLinterna()
     {
         luzEncendida = false;
-        ligthCone.gameObject.SetActive(false);
         if (linternaLuz != null)
-            onOffAudioSource.Play();
             linternaLuz.enabled = false;
     }
 

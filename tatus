@@ -1,0 +1,238 @@
+[33mcommit fa288ed914b73aacb4ce7bf39e037c76d19a6298[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Wed Sep 3 17:14:59 2025 -0500
+
+    Fix escena no se abre
+
+[33mcommit c0dea6fa7133bbae371ea2e0dce8ff94185926bb[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Wed Sep 3 11:21:59 2025 -0500
+
+    Revert "Fixed de la luz para VR"
+    
+    This reverts commit 4d5219a1039c9303b664029e01a0440b0a1873d4.
+
+[33mcommit bc8dadd6de8a009aad3da36ea1861024d67c674a[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Tue Sep 2 19:32:48 2025 -0500
+
+    Fix merge
+
+[33mcommit 4d5219a1039c9303b664029e01a0440b0a1873d4[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Tue Sep 2 19:32:31 2025 -0500
+
+    Fixed de la luz para VR
+    
+    PRimer arreglo fuerte de la luz para funcion stand alone meta quest 3
+
+[33mcommit 3d8989585cd03b4527d64e4a677997c73d3eec91[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Tue Sep 2 17:19:46 2025 -0500
+
+    actualizar README
+
+[33mcommit 1c8c3495fd079bbed46f8c333e06461983445975[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Tue Sep 2 17:14:39 2025 -0500
+
+    meta avatars sdk
+
+[33mcommit 780e2323a20291ffdff7cb7a8cbfe4ad0c2bd532[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Tue Sep 2 14:54:07 2025 -0500
+
+    Iconos y fix del update del API all in one
+
+[33mcommit 1aeb764e3546c45fc43014920588561500750609[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Fri Aug 29 18:47:57 2025 -0500
+
+    Linterna y baked de luces
+
+[33mcommit f834a9f12167ec5b725c330d20b689f0664c6ae2[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Thu Aug 28 17:28:03 2025 -0500
+
+    Fix de la luz de  vizualizacion de la puert
+    
+    se cambio la luz por un material brilloso asi como cambios menores en el sonido del enemigo
+
+[33mcommit e524836b62be6092a1ef0395d0874822c30a2e14[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Tue Aug 26 17:29:10 2025 -0500
+
+    Logica de la Puerta Ludolab
+    
+    Se ha agrego el Grabable a la puerta de ludolab asi como el control para entrar y salir asi como el sonido de ambiente
+
+[33mcommit 810b9fdafc78e2718c578c1987ee29661649b653[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Mon Aug 25 15:48:47 2025 -0500
+
+    Modificacion del mapa por las sombras
+
+[33mcommit fa6edce0cbf759bce4afe3f435661467bd7474db[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Mon Aug 25 13:14:50 2025 -0500
+
+    Modificación del script del enemigo
+
+[33mcommit d8cbf8be3387b40301281e0f86ee12f319d9b25c[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Fri Aug 22 16:56:11 2025 -0500
+
+    arreglo seguimiento demon
+
+[33mcommit 20b5e3aae0f26a3a2a4d4274e5be146857363085[m
+Merge: 025701c 3019d14
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Fri Aug 22 16:55:16 2025 -0500
+
+    fix merge conflixt
+
+[33mcommit 025701ca130ca391b1f662afb292a108a200a882[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Fri Aug 22 16:29:06 2025 -0500
+
+    ignore archivos .plastic
+
+[33mcommit 9070de22f670a96b91d1a6fcb3cc9970db4d19ed[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Fri Aug 22 16:14:37 2025 -0500
+
+    agregar propiedad grabbable a todos los setup
+
+[33mcommit 3019d14b3c9950b66ea61e68448769a3c725a932[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Fri Aug 22 16:01:43 2025 -0500
+
+    Se cerro el mapa
+
+[33mcommit ae211c7aeaf910f19f5a4ff6435fbceb6ed0448c[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Fri Aug 22 15:57:30 2025 -0500
+
+    Funcionando que el enemigo siga al jugador en el oculus y en el simulador
+
+[33mcommit 6005b0e0790fba1e8c6a2b4ca537e924142a9767[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Fri Aug 22 14:22:32 2025 -0500
+
+    añadir propiedad grabbable a pantallas
+
+[33mcommit 8c78867a28309ad783b79540850f59d65dc063f3[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Fri Aug 22 13:45:23 2025 -0500
+
+    Enemigo persigue al jugador solo si esta en su rango de visión
+
+[33mcommit 4a1b8dc4d73a7ed89a845687513cde63a543afac[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Fri Aug 22 13:25:48 2025 -0500
+
+    Funcionalidad de la puerta
+    
+    Se activa la funcionalidad de la puerta
+    en la escena TEST
+
+[33mcommit 45097e261d901f134df10b91ca6468901eb905f6[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Fri Aug 22 10:41:32 2025 -0500
+
+    Avance enemigo sin NavMesh
+
+[33mcommit 3dd8b9d118abf5ad737c6859a5c1b61109dfbb36[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Wed Aug 20 16:57:41 2025 -0500
+
+    agregar propiedad grabbable a objetos pequeños
+
+[33mcommit 2b68ffe5404445634aa5ad0644799de5bbcd6461[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Mon Aug 18 14:43:40 2025 -0500
+
+    Se arregló las ultimas escalas negativas
+
+[33mcommit 4672ff9e1ed81aa95834b98cb91c0c6f0369bd42[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Fri Aug 15 18:02:23 2025 -0500
+
+    Prueba de la puerta
+
+[33mcommit d098535978e8a3a4422b860a696701913cf57776[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Thu Aug 14 13:08:20 2025 -0500
+
+    intento de mover la puerta
+
+[33mcommit 6bc8a30f117c9017d3ae610009bd8ca33c87b26a[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Thu Aug 14 13:01:21 2025 -0500
+
+    Merge Arreglo ADN lab
+    
+    Arreglo collisiopn box negativo
+
+[33mcommit 01196a77d8c3b1d700af9d3d4bc8bbe2263b80d8[m
+Merge: 0035557 2e1d9d2
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Thu Aug 14 12:57:39 2025 -0500
+
+    Merge branch 'main' of https://github.com/DanMeraDev/GameVR
+
+[33mcommit 003555704f03ec1be976a17efdbde126def33a56[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Thu Aug 14 12:57:17 2025 -0500
+
+    se arregló las escalas de las mesas de Lasinac
+
+[33mcommit 2e1d9d223adbce58ca302f0a26d80b7998dd4cd4[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Thu Aug 14 12:51:39 2025 -0500
+
+    Arreglo coliciones alan turing
+
+[33mcommit 2e0873fa459537f0deb3257bd45e3885f1b56829[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Thu Aug 14 12:38:44 2025 -0500
+
+    se arreglo la escala de las mesas de algunos laboratorios
+
+[33mcommit 9859ad8f02f3d37b3388ebe9531f7156ca951031[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Wed Aug 13 17:05:37 2025 -0500
+
+    Moivimiento y preparacion del simulador
+
+[33mcommit e63470fb145b03cdc0e60a655423e7a5a491067e[m
+Author: Juan <juan.benavides@epn.edu.ec>
+Date:   Tue Aug 12 17:51:27 2025 -0500
+
+    Start up para proyecto VR
+    
+    Se configuro el SETUP para que el proyecto funcione con VR ver el readme
+
+[33mcommit 1b538f75b4847436b7b8dae47bbd63ce3cf0eb75[m
+Author: Gabriel Jaya <gabriel.jaya@epn.edu.ec>
+Date:   Tue Aug 12 15:05:52 2025 -0500
+
+    se avanzó el mapa de miedo
+
+[33mcommit 224335ea6e04ee7dccfc574a2da7ea2365c49243[m
+Author: F 3 R K H 4 N <133190285+Ferkhan@users.noreply.github.com>
+Date:   Tue Jul 15 14:08:46 2025 -0500
+
+    Merge en main
+
+[33mcommit 5b342b198aabfd84ab4ca9444ce3807cbe39b2f6[m[33m ([m[1;31morigin/warproom[m[33m, [m[1;31morigin/escenario-miedo[m[33m, [m[1;31morigin/escenario-ira[m[33m, [m[1;31morigin/escenario-disgusto[m[33m, [m[1;31morigin/escenario-asombro[m[33m, [m[1;31morigin/General[m[33m)[m
+Author: dan <dm375211@gmail.com>
+Date:   Thu Jul 3 11:46:34 2025 -0500
+
+    escenario miedo
+
+[33mcommit 0ad02c2acfebc7a74da340936b4cdc08799b7dc8[m
+Author: dan <dm375211@gmail.com>
+Date:   Thu Jul 3 11:32:01 2025 -0500
+
+    first commit

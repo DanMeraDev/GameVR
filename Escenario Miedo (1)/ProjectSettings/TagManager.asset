@@ -13,6 +13,7 @@ TagManager:
   - PickUp
   - Flashlight
   - Battery
+  - physics
   layers:
   - Default
   - TransparentFX

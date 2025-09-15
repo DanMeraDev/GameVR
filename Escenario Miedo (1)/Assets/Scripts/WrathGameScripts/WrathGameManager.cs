@@ -1,3 +1,4 @@
+using Meta.WitAi.Speech;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,6 +28,9 @@ public class WrathGameManager : MonoBehaviour
     public float laughVolume = 0.3f;
     private AudioSource LaugthAudioSource;
 
+    //Controladores de Respawn
+    public bool gotoStartPoint=false;
+
 
     void Start()
     {
@@ -50,6 +54,20 @@ public class WrathGameManager : MonoBehaviour
     void Update()
     {
         checkRespawn();
+    }
+
+    public void respawnAtStart(Collider other)
+    {
+        if (other.name == "Ball"  )
+        {
+            other.transform.position = respawnPointBall;
+
+        }
+        if(other.tag == "player")
+        {
+            other.transform.position = respawnPointPLayer;
+        }
+
     }
     void checkRespawn()
     {

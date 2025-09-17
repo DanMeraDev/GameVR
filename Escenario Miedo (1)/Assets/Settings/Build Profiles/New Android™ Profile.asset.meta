@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Escenario Miedo (1)/Assets/Settings/Build Profiles/New Android™ Profile.asset.meta
 guid: 85695992584dc4147beb1a69e9d36e4b
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
+========
+guid: 4d0483751cb9d0645a37ce776ec4b212
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> 70cf3b8de3dae88c72dcd7283ee286dc208db8a6:Escenario Miedo (1)/Assets/3d Models/old-house/Materials/Material__26_albedo.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

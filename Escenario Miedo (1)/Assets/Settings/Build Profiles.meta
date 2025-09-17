@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Escenario Miedo (1)/Assets/Settings/Build Profiles.meta
 guid: 264881176fe4da947a636bf954b43fb0
+========
+guid: e4205eb13d65df743b248743afe331d8
+>>>>>>>> 70cf3b8de3dae88c72dcd7283ee286dc208db8a6:Escenario Miedo (1)/Assets/RPGPP_LT.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

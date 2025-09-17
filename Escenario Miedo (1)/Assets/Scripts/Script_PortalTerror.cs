@@ -7,32 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class Script_PortalTerror : MonoBehaviour
 {
-#if UNITY_EDITOR
-    [SerializeField] private SceneAsset selectedScene;
-#endif
 
-    [SerializeField] private string sceneName = "Warproom";
+    [SerializeField] private int sceneIndex = -1;
 
-#if UNITY_EDITOR
-    // Esto actualiza el nombre de la escena cuando cambias el SceneAsset desde el editor
-    private void OnValidate()
-    {
-        if (selectedScene != null)
-        {
-            sceneName = selectedScene.name;
-        }
-    }
-#endif
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!string.IsNullOrEmpty(sceneName))
+        // Verifica que sea el jugador
+        if (!other.CompareTag("Player")) return;
+
+        // Si el campo está en -1, no hace nada
+        if (sceneIndex < 0)
         {
-            SceneManager.LoadScene(sceneName);
+            Debug.LogWarning($"{name}: Scene index no asignado, teleport ignorado.");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("No se ha asignado un nombre de escena válido.");
-        }
+
+        // Cargar escena
+        SceneManager.LoadScene(sceneIndex);
     }
 }

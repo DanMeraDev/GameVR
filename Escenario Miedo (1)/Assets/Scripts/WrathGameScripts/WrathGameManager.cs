@@ -1,9 +1,11 @@
 using Meta.WitAi.Speech;
 using Unity.VisualScripting;
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 
 public class WrathGameManager : MonoBehaviour
 {
+    [Header("Elementos ha arrastrar")]
     //Objetos que haran respawn
     public Transform playerPosition;
     public Transform ballPosition;
@@ -11,18 +13,21 @@ public class WrathGameManager : MonoBehaviour
     public Transform Stickwork2;
     public Transform platform1;
     public Transform platform2;
-    
+
+    [Header("Variables de físicas")]
     //ALtura minima de respawn
     public float minY = -10;
 
+    [Header("Posicion de respawn")]
     //Posiciones de respawn
-    public Vector3 respawnPointPLayer = new Vector3(164.7f, 9.9f, 43.3f);
+    public Vector3 respawnPointPLayer = new Vector3(164.7f, 9.5f, 43.3f);
     public Vector3 respawnPointBall = new Vector3(165.32f, 10.55f, 46f);
     private Vector3 respawnStickwork;
     private Vector3 respawnStickwork2;
     private Vector3 respawnPlatform1;
     private Vector3 respawnPlatform2;
 
+    [Header("audio")]
     //Sonidos De efectos
     public AudioClip LaugthSound;
     public float laughVolume = 0.3f;
@@ -30,6 +35,9 @@ public class WrathGameManager : MonoBehaviour
 
     //Controladores de Respawn
     public bool gotoStartPoint=false;
+    [Header("Colocar player controller")]
+    //paker controller
+    public GameObject PlayerController;
 
 
     void Start()
@@ -51,6 +59,9 @@ public class WrathGameManager : MonoBehaviour
            LaugthAudioSource.Play();
         }
     }
+
+
+
     void Update()
     {
         checkRespawn();
@@ -63,43 +74,32 @@ public class WrathGameManager : MonoBehaviour
             other.transform.position = respawnPointBall;
 
         }
-        if(other.tag == "player")
+        if (other.tag == "Player")
         {
-            other.transform.position = respawnPointPLayer;
-        }
+            PlayerController.SetActive(false);
+            Debug.Log("posicion1 " + other.transform.position);
+            playerPosition.position = respawnPointPLayer;
+            Debug.Log("posicion2 " + other.transform.position);
+            PlayerController.SetActive(true);
 
+        }
     }
     void checkRespawn()
     {
-        if (playerPosition.position.y < minY)
-        {
-            playerPosition.position = respawnPointPLayer;
-            ballPosition.position = respawnPointBall;
-        }
+        CheckAndRespawn(playerPosition, respawnPointPLayer);
+        CheckAndRespawn(ballPosition, respawnPointBall);
+        CheckAndRespawn(Stickwork, respawnStickwork);
+        CheckAndRespawn(Stickwork2, respawnStickwork2);
+        CheckAndRespawn(platform1, respawnPlatform1);
+        CheckAndRespawn(platform2, respawnPlatform2);
+    }
 
-        if (ballPosition.position.y < minY)
+    //Funcion por si te caes del mundo
+    void CheckAndRespawn(Transform obj, Vector3 respawnPos)
+    {
+        if (obj.position.y < minY)
         {
-            ballPosition.position = respawnPointBall;
-        }
-
-        if (Stickwork.position.y < minY)
-        {
-            Stickwork.position = respawnStickwork;
-        }
-
-        if (Stickwork2.position.y < minY)
-        {
-            Stickwork2.position = respawnStickwork2;
-        }
-
-        if (platform1.position.y < minY)
-        {
-            platform1.position = respawnPlatform1;
-        }
-
-        if (platform2.position.y < minY)
-        {
-            platform2.position = respawnPlatform2;
+            obj.position = respawnPos;
         }
     }
 }

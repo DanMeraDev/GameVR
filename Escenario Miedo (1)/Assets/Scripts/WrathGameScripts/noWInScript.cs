@@ -30,6 +30,7 @@ public class noWInScript : MonoBehaviour
         signalText.text = newText;
         jokeSource.Play();
         gameManager.respawnAtStart(other);
+        Debug.Log("Player");
     }
 
 }

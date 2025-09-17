@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 85d113e10ceabf442b1ed61ade7d3b06
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176906
-  packageName: Stylized Nature Kit Lite
-  packageVersion: 1.2
-  assetPath: Assets/Proxy Games/Stylized Nature Kit Lite/Meshes/Water/Flat Water.fbx
-  uploadId: 705314
+guid: 5eeca554129885646ae92d1ffa304da3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -15,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Water
-    second: {fileID: 2100000, guid: 94ea32e4f0f6cab4e98928aadb7d9992, type: 2}
+    second: {fileID: 2100000, guid: e64dfa46db4c6fe41808d99856f4bdc6, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -48,7 +41,6 @@ ModelImporter:
     - 0.25
     - 0.125
     - 0.0625
-    - 0.03125
     - 0.01
     globalScale: 1
     meshCompression: 0

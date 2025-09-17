@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 85d113e10ceabf442b1ed61ade7d3b06
-AssetOrigin:
-  serializedVersion: 1
-  productId: 176906
-  packageName: Stylized Nature Kit Lite
-  packageVersion: 1.2
-  assetPath: Assets/Proxy Games/Stylized Nature Kit Lite/Meshes/Water/Flat Water.fbx
-  uploadId: 705314
+guid: e62ebd46d2679c94eb58fe5050d60574
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -14,12 +7,47 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Water
-    second: {fileID: 2100000, guid: 94ea32e4f0f6cab4e98928aadb7d9992, type: 2}
+      name: aleron_defaultMat
+    second: {fileID: -1038465383720137942, guid: 1c7af8c666da9ea46b29287e212bc3c8, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dome_defaultMat
+    second: {fileID: 2100000, guid: e1ff79e11a7efc941a917a9d3e1d511a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door_defaultMat
+    second: {fileID: -8067726398312463513, guid: 523dc43233204e5468db5046f5b92e4a, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass_defaultMat
+    second: {fileID: 2100000, guid: a0d67044edb1f854a849c0491daf89dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rails_defaultMat
+    second: {fileID: 2100000, guid: e1ff79e11a7efc941a917a9d3e1d511a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof_defaultMat
+    second: {fileID: 2100000, guid: 5ad54d1516d59e343b6c8457cbd01755, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tower_defaultMat
+    second: {fileID: 2100000, guid: 545fb8c35da00554b9b23ace466894e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window_defaultMat
+    second: {fileID: 4372600655710007445, guid: bedb3b64c92c1f94f80a69913d37e3c5, type: 3}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
-    materialSearch: 2
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
@@ -44,12 +72,7 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages:
-    - 0.25
-    - 0.125
-    - 0.0625
-    - 0.03125
-    - 0.01
+    lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
@@ -63,7 +86,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -116,7 +139,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
+  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

@@ -100,6 +100,7 @@ public class WrathGameManager : MonoBehaviour
         if (obj.position.y < minY)
         {
             obj.position = respawnPos;
+            obj.rotation = new Quaternion(0f, 0f, 0f,1f);
         }
     }
 }

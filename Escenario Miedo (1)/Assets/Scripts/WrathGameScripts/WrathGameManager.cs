@@ -31,7 +31,11 @@ public class WrathGameManager : MonoBehaviour
     //Sonidos De efectos
     public AudioClip LaugthSound;
     public float laughVolume = 0.3f;
-    private AudioSource LaugthAudioSource;
+    public AudioClip grapSound;
+    public float grapSoundVolume = 0.3f;
+    private AudioSource effectSoundSource;
+
+
 
     //Controladores de Respawn
     public bool gotoStartPoint=false;
@@ -43,9 +47,8 @@ public class WrathGameManager : MonoBehaviour
     void Start()
     {
         //Añado el sonido de risa al objeto que contiene los sonidos
-        LaugthAudioSource = this.transform.GetChild(0).AddComponent<AudioSource>();
-        LaugthAudioSource.clip = LaugthSound;
-        LaugthAudioSource.volume = laughVolume;
+        effectSoundSource = this.transform.GetChild(0).AddComponent<AudioSource>();
+
         respawnStickwork = Stickwork.position;
         respawnStickwork2= Stickwork2.position;
         respawnPlatform1= platform1.position;
@@ -56,7 +59,7 @@ public class WrathGameManager : MonoBehaviour
     {
         if(other.name == "Ball")
         {
-           LaugthAudioSource.Play();
+            effectSoundSource.PlayOneShot(LaugthSound, laughVolume);
         }
     }
 
@@ -69,6 +72,7 @@ public class WrathGameManager : MonoBehaviour
 
     public void respawnAtStart(Collider other)
     {
+
         if (other.name == "Ball"  )
         {
             other.transform.position = respawnPointBall;
@@ -77,10 +81,9 @@ public class WrathGameManager : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerController.SetActive(false);
-            Debug.Log("posicion1 " + other.transform.position);
             playerPosition.position = respawnPointPLayer;
             Debug.Log("posicion2 " + other.transform.position);
-            PlayerController.SetActive(true);
+        
 
         }
     }
@@ -101,6 +104,16 @@ public class WrathGameManager : MonoBehaviour
         {
             obj.position = respawnPos;
             obj.rotation = new Quaternion(0f, 0f, 0f,1f);
+        }
+    }
+    public void PlayGrabSound()
+    {
+        Debug.Log("sonido");
+
+        if (effectSoundSource != null && grapSound != null)
+        {
+            Debug.Log("sonido one shot");
+            effectSoundSource.PlayOneShot(grapSound, grapSoundVolume);
         }
     }
 }

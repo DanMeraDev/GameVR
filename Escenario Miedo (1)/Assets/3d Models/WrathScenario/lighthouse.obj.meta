@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: aleron_defaultMat
-    second: {fileID: -1038465383720137942, guid: 1c7af8c666da9ea46b29287e212bc3c8, type: 3}
+    second: {fileID: 2100000, guid: 68ba13b80ba336a45ac5219980648338, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

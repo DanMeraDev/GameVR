@@ -33,6 +33,8 @@ public class WrathGameManager : MonoBehaviour
     public float laughVolume = 0.3f;
     public AudioClip grapSound;
     public float grapSoundVolume = 0.3f;
+    public AudioClip checkSound;
+    public float checkSoundVolume = 0.3f;
     private AudioSource effectSoundSource;
 
 
@@ -83,7 +85,8 @@ public class WrathGameManager : MonoBehaviour
             PlayerController.SetActive(false);
             playerPosition.position = respawnPointPLayer;
             Debug.Log("posicion2 " + other.transform.position);
-        
+            PlayerController.SetActive(true);
+
 
         }
     }
@@ -114,6 +117,15 @@ public class WrathGameManager : MonoBehaviour
         {
             Debug.Log("sonido one shot");
             effectSoundSource.PlayOneShot(grapSound, grapSoundVolume);
+        }
+    }
+    public void PlayCheckpointSound()
+    {
+       
+        if (effectSoundSource != null && checkSound != null)
+        {
+            Debug.Log("sonido one shot");
+            effectSoundSource.PlayOneShot(checkSound, checkSoundVolume);
         }
     }
 }

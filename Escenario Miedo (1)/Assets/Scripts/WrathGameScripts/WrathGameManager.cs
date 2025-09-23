@@ -128,4 +128,14 @@ public class WrathGameManager : MonoBehaviour
             effectSoundSource.PlayOneShot(checkSound, checkSoundVolume);
         }
     }
+    public void respawnBall(Collider other)
+    {
+        
+        Rigidbody rb= other.gameObject.GetComponent<Rigidbody>();
+        
+        ballPosition.position = respawnPointBall;
+
+        effectSoundSource.PlayOneShot(LaugthSound, laughVolume);
+
+    }
 }

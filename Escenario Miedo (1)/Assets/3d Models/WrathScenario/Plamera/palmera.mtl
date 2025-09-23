@@ -1,0 +1,30 @@
+newmtl MeshespalmTreecylinder0011Mtl
+Material Color
+Ka 0.358654 0.113921 0.0315514
+Kd 0.358654 0.113921 0.0315514
+Ks 0.0225038 0.00714798 0.0019797 
+
+d 1
+
+Ns 0
+
+newmtl MeshespalmTreecube1Mtl
+Material Color
+Ka 0.0581872 0.436813 0.0179364
+Kd 0.0581872 0.436813 0.0179364
+Ks 0.00365096 0.0274079 0.00112542 
+
+d 1
+
+Ns 0
+
+newmtl MeshespalmTreesphere1Mtl
+Material Color
+Ka 0.383775 0.186989 0.0657539
+Kd 0.383775 0.186989 0.0657539
+Ks 0.02408 0.0117326 0.00412573 
+
+d 1
+
+Ns 0
+

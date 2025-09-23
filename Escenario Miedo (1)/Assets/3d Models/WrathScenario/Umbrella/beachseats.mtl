@@ -1,0 +1,88 @@
+newmtl Part31Mtl
+Material Color
+Ka 1 0 0
+Kd 1 0 0
+Ks 0.396078 0 0 
+
+d 1
+
+Ns 0
+
+newmtl Part2Mtl
+Material Color
+Ka 0.804559 0.804559 0.84337
+Kd 0.804559 0.804559 0.84337
+Ks 0.318669 0.318669 0.334041 
+
+d 1
+
+Ns 0
+
+newmtl Part1Mtl
+Material Color
+Ka 0.804559 0.804559 0.84337
+Kd 0.804559 0.804559 0.84337
+Ks 0.536373 0.536373 0.562247 
+
+d 1
+
+Ns 255
+
+map_Ka Part1_diff.png
+map_Kd Part1_diff.png
+map_d Part1_diff.png
+
+map_Bump Part1_nmap.png
+
+map_Ns Part1_spec.png
+
+newmtl Part58Mtl
+Material Color
+Ka 0.103634 0.329729 0.0697271
+Kd 0.103634 0.329729 0.0697271
+Ks 0.0410472 0.130599 0.0276174 
+
+d 1
+
+Ns 0
+
+newmtl Part4Mtl
+Material Color
+Ka 0.000638183 0.254916 0.632043
+Kd 0.000638183 0.254916 0.632043
+Ks 0.00025277 0.100967 0.250338 
+
+d 1
+
+Ns 0
+
+newmtl Triangleb348733098506931Mtl
+Material Color
+Ka 0.789314 0.781751 0.74453
+Kd 0.789314 0.781751 0.74453
+Ks 0.31263 0.309635 0.294892 
+
+d 1
+
+Ns 0
+
+newmtl Triangleb330586158752441Mtl
+Material Color
+Ka 0.560499 0.0169881 0.00775103
+Kd 0.560499 0.0169881 0.00775103
+Ks 0.222002 0.0067286 0.00307001 
+
+d 1
+
+Ns 0
+
+newmtl Part82Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.147981 0.145991 0.152005 
+
+d 1
+
+Ns 0
+

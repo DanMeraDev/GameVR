@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Escenario Miedo (1)/Assets/3d Models/MenuPrincipal/Robotcito/Chopper.mat.meta
 guid: 4b4332d7dfb6c0444a20f49267665d61
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+========
+guid: 0ecadfc66aa59474f88075d8dd114f2a
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>>> dc22bf0e38e0578e317b05115483e03cfa54be0f:Escenario Miedo (1)/Assets/Halloween Pack-Cemetery Snap.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

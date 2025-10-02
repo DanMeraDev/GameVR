@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Escenario Miedo (1)/Assets/3d Models/MenuPrincipal/Container.meta
 guid: 5522c01dbc2026b4ebcb8c684bff9512
+========
+guid: fad5c7cb1fb0c63458cc0fe704691d18
+>>>>>>>> dc22bf0e38e0578e317b05115483e03cfa54be0f:Escenario Miedo (1)/Assets/Halloween Pack-Cemetery Snap/FBX.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

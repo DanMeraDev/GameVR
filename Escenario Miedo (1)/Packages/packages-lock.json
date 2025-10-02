@@ -165,6 +165,18 @@
       "depth": 1,
       "source": "builtin",
       "dependencies": {}
+<<<<<<< HEAD
+=======
+    },
+    "com.unity.ide.rider": {
+      "version": "3.0.37",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ext.nunit": "1.0.6"
+      },
+      "url": "https://packages.unity.com"
+>>>>>>> dc22bf0e38e0578e317b05115483e03cfa54be0f
     },
     "com.unity.ide.visualstudio": {
       "version": "2.0.23",

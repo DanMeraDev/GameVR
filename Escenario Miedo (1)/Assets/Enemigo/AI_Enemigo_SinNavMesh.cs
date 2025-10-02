@@ -62,6 +62,7 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
             chasingPlayer = true;
             playerLostTime = 0f;
             SetCameraShake(true);
+
         }
         else
         {

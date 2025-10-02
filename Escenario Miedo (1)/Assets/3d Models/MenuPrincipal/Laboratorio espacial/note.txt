@@ -1,0 +1,11 @@
+Hello, thanks for the confidence that you gave to me ^^ 
+
+In this pack you will find a blender scene with all of the assets already integrated with the texture on them.
+If the textures don't shows up press F3 and search for "find missing files" then select the "textures" folder present on the asset pack and all the textures should be applicated.
+
+You can aslso find an FBX file of each prop on the texture folder.
+
+The Maps of roughness, metallic and AO are combined on a single map for a better optimisation on unreal engine.
+The roughness is on the green channel, the metallic on the blue and the AO in the red channel.
+
+Enjoy

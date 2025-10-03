@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Oculus.Interaction.Body.Samples.BodyPoseSwitcher;
 
 public class noWInScript : MonoBehaviour
@@ -10,6 +11,9 @@ public class noWInScript : MonoBehaviour
     public AudioClip jokeSound;
     private AudioSource jokeSource;
     [Range(0f, 1f)]  public float volumen=0.5f;
+    [Header("Es letrero verdadero")]
+    public bool isTrueWin = false;
+
 
     //Texto del letrero
     [Header("Texto del letrero")]
@@ -17,7 +21,7 @@ public class noWInScript : MonoBehaviour
     public string newText = "Vuelve al Inicio ahí estara la pelota";
     //Invocacion al gameManager
     public WrathGameManager gameManager;
-
+    private bool alreadyTriggered = false;
     //Instanciación de objetos
     private void Awake()
     {
@@ -27,10 +31,28 @@ public class noWInScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        signalText.text = newText;
-        jokeSource.Play();
-        gameManager.respawnAtStart(other);
-        Debug.Log("Player");
+         if (alreadyTriggered) return;
+        
+        if(isTrueWin)
+        {
+            gameManager.PlaywinSound();
+            signalText.text = newText;
+            Invoke("ChangeScene", 5f);
+            alreadyTriggered = true;
+        }
+        else
+        { 
+            signalText.text = newText;
+            jokeSource.Play();
+            gameManager.respawnAtStart(other);
+            Debug.Log("Player");
+        }
+
+
+    }
+    private void ChangeScene()
+    {
+        SceneManager.LoadScene("MenuPrincipal");
     }
 
 }

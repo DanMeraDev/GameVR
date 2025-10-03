@@ -13,6 +13,7 @@ public class WrathGameManager : MonoBehaviour
     public Transform Stickwork2;
     public Transform platform1;
     public Transform platform2;
+    public Transform Stickwork3;
 
     [Header("Variables de físicas")]
     //ALtura minima de respawn
@@ -24,8 +25,10 @@ public class WrathGameManager : MonoBehaviour
     public Vector3 respawnPointBall = new Vector3(165.32f, 10.55f, 46f);
     private Vector3 respawnStickwork;
     private Vector3 respawnStickwork2;
+    private Vector3 respawnStickwork3;
     private Vector3 respawnPlatform1;
     private Vector3 respawnPlatform2;
+    
 
     [Header("audio")]
     //Sonidos De efectos
@@ -35,7 +38,10 @@ public class WrathGameManager : MonoBehaviour
     public float grapSoundVolume = 0.3f;
     public AudioClip checkSound;
     public float checkSoundVolume = 0.3f;
+    public float winSoundVolume = 0.3f;
+    public AudioClip winSound;
     private AudioSource effectSoundSource;
+
 
 
 
@@ -53,8 +59,10 @@ public class WrathGameManager : MonoBehaviour
 
         respawnStickwork = Stickwork.position;
         respawnStickwork2= Stickwork2.position;
-        respawnPlatform1= platform1.position;
+        respawnStickwork3 = Stickwork3.position;
+        respawnPlatform1 = platform1.position;
         respawnPlatform2= platform2.position;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,8 +94,6 @@ public class WrathGameManager : MonoBehaviour
             playerPosition.position = respawnPointPLayer;
             Debug.Log("posicion2 " + other.transform.position);
             PlayerController.SetActive(true);
-
-
         }
     }
     void checkRespawn()
@@ -98,6 +104,7 @@ public class WrathGameManager : MonoBehaviour
         CheckAndRespawn(Stickwork2, respawnStickwork2);
         CheckAndRespawn(platform1, respawnPlatform1);
         CheckAndRespawn(platform2, respawnPlatform2);
+        CheckAndRespawn(Stickwork3, respawnStickwork3);
     }
 
     //Funcion por si te caes del mundo
@@ -126,6 +133,15 @@ public class WrathGameManager : MonoBehaviour
         {
             Debug.Log("sonido one shot");
             effectSoundSource.PlayOneShot(checkSound, checkSoundVolume);
+        }
+    }
+    public void PlaywinSound()
+    {
+
+        if (effectSoundSource != null && winSound != null)
+        {
+            Debug.Log("sonido one shot");
+            effectSoundSource.PlayOneShot(winSound, winSoundVolume);
         }
     }
     public void respawnBall(Collider other)

@@ -21,7 +21,7 @@ public class VRLoadingScreen : MonoBehaviour
         if (fadeImage != null)
             fadeImage.color = new Color(0, 0, 0, 0); // Transparent al inicio
 
-        StartCoroutine(LoadAsync());
+        //StartCoroutine(LoadAsync());
     }
 
     private void Update()
@@ -73,4 +73,10 @@ public class VRLoadingScreen : MonoBehaviour
             yield return null;
         }
     }
+
+    public void IniciarCarga()
+    {
+        StartCoroutine(LoadAsync());
+    }
+
 }

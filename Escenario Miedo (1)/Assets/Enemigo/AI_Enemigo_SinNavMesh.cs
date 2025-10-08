@@ -21,15 +21,24 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
 
     // Componentes y estado interno
     private Rigidbody rb;
-    private AudioSource audioSource;
+    public AudioSource[] audioSourceArray;
     private Animator animator;
     private Transform currentTarget;
     private bool chasingPlayer = false;
     private float playerLostTime = 0f;
 
+    //Componente de Audio
+    [Header("Audio")]
+    public AudioSource screamSound;
+    public AudioSource audioSource;
+
+
+
     void Start()
     {
+       
         rb = GetComponent<Rigidbody>();
+  
         if (rb == null)
         {
             Debug.LogError("El enemigo '" + gameObject.name + "' necesita un Rigidbody.");
@@ -38,7 +47,9 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
         }
         rb.freezeRotation = true;
 
-        audioSource = GetComponent<AudioSource>();
+        audioSourceArray = GetComponents<AudioSource>();
+        if (audioSourceArray.Length >= 1) audioSource = audioSourceArray[0];   // pasos/ambiente
+        if (audioSourceArray.Length >= 2) screamSound = audioSourceArray[1];   // miedo
         if (audioSource != null)
         {
             audioSource.volume = 0;
@@ -62,6 +73,8 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
             chasingPlayer = true;
             playerLostTime = 0f;
             SetCameraShake(true);
+            HandleScareAudio(true);
+
 
         }
         else
@@ -76,6 +89,7 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
                 }
             }
             SetCameraShake(false);
+            HandleScareAudio(false);
         }
 
         if (playerHead != null)
@@ -85,6 +99,21 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
             UpdateAudioVolume(Vector3.Distance(enemyPosOnPlane, playerPosOnPlane));
         }
     }
+    void HandleScareAudio(bool seePlayer)
+    {
+        if (screamSound == null) return;
+
+        if (seePlayer)
+        {
+            if (!screamSound.isPlaying) screamSound.Play();
+        }
+        else
+        {
+            if (screamSound.isPlaying) screamSound.Stop();
+        }
+    }
+
+
 
     void FixedUpdate()
     {

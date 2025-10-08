@@ -2497,7 +2497,7 @@ MonoBehaviour:
   Stickwork2: {fileID: 488649108}
   platform1: {fileID: 2048000934}
   platform2: {fileID: 853493597}
-  Stickwork3: {fileID: 0}
+  Stickwork3: {fileID: 672401452}
   minY: -5
   respawnPointPLayer: {x: 164.7, y: 10.5, z: 43.3}
   respawnPointBall: {x: 164.7, y: 10.55, z: 46}
@@ -2508,7 +2508,7 @@ MonoBehaviour:
   checkSound: {fileID: 8300000, guid: 56b9d9a7cb8cf544b8223e6713a31f61, type: 3}
   checkSoundVolume: 0.5
   winSoundVolume: 0.3
-  winSound: {fileID: 0}
+  winSound: {fileID: 8300000, guid: b39045553e908d64e87fd9bdd4e531b8, type: 3}
   gotoStartPoint: 0
   PlayerController: {fileID: 269975207}
 --- !u!65 &135162907

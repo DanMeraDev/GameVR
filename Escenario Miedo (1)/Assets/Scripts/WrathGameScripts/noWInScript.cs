@@ -52,7 +52,7 @@ public class noWInScript : MonoBehaviour
     }
     private void ChangeScene()
     {
-        SceneManager.LoadScene("MenuPrincipal");
+        SceneMessenger.LoadMenu();
     }
 
 }

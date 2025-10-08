@@ -37531,6 +37531,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c67033f580359c4581dff1ccffcca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1441357621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 0}
+  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  NameTextureParameter_baseColorTexture: _MainTex
+  NameTextureParameter_diffuseTexture: _MainTex
+  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
+  NameTextureParameter_specularGlossiness: _Specular
+  NameTextureParameter_normalTexture: _BumpMap
+  NameTextureParameter_occlusionTexture: _OcclusionMap
+  NameTextureParameter_emissiveTexture: _EmissiveMap
+  NameTextureParameter_flowTexture: _FlowMap
+  NameColorParameter_BaseColorFactor: _Color
+  UseColorParameter_BaseColorFactor: 0
+  NameFloatParameter_MetallicFactor: _Metallic
+  UseFloatParameter_MetallicFactor: 0
+  NameFloatParameter_RoughnessFactor: _Roughness
+  UseFloatParameter_RoughnessFactor: 0
+  NameColorParameter_DiffuseFactor: _Diffuse
+  UseColorParameter_DiffuseFactor: 0
+  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
+  Texture_SSSCurvatureTexture: {fileID: 0}
+  NameTextureParameter_SSSZHTexture: _SSSZHLUT
+  Texture_SSSZHTexture: {fileID: 0}
+  KeywordsEnumerations: []
+  KeywordsToEnable: []
+  NameFloatConstants: []
+  ValueFloatConstants: []
+  ExtensionConfiguration:
+    _extensionNames: []
+    _entryNamesPerExtension: []
+    _replacementNamesPerExtension: []
 --- !u!1001 &1453530291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46427,7 +46469,7 @@ Transform:
   m_GameObject: {fileID: 2014651722}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.004226002, z: -0, w: 0.9999911}
-  m_LocalPosition: {x: 17.586, y: 0, z: 15.155999}
+  m_LocalPosition: {x: 17.587, y: 0, z: 15.05}
   m_LocalScale: {x: 2.8275282, y: 3.5213785, z: 3.0046937}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46445,7 +46487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f711544fa32a9542b66334abfda22e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: -1
+  sceneIndex: 3
 --- !u!65 &2014651725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46594,7 +46636,7 @@ Transform:
   m_GameObject: {fileID: 2061801881}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.08306953, z: -0, w: 0.99654377}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.37, y: 0, z: -0.06}
   m_LocalScale: {x: 2.8275282, y: 3.5213785, z: 3.0046937}
   m_ConstrainProportionsScale: 0
   m_Children: []

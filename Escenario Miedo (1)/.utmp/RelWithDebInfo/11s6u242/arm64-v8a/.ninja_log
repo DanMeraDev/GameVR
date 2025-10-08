@@ -1,0 +1,10 @@
+# ninja log v5
+34	4209	7815823247987135	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	b58e1a81b1385f3d
+1	4237	7815823248884732	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c3d029723606a8d0
+75	4406	7815823250824966	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	20a20897f389cb97
+16	4432	7815823250934679	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e7e968e9e3297261
+45	4543	7815823252032309	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	923c54a8e4b5addc
+54	5058	7815823257115091	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	3911112f73cbdb6f
+64	5287	7815823259528940	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	641231b919263b4f
+25	5407	7815823260905287	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b646fc348997761d
+5407	5655	7815823263484812	D:/Repos2025/Funcional/GameVR/Escenario Miedo (1)/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/11s6u242/obj/arm64-v8a/libgame.so	656be9761a1651f9

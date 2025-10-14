@@ -75,5 +75,6 @@ Desktop.ini
 
 # Archivos ZIP de Meta Avatar SDK (Avatars de ejemplo)
 Assets/Oculus/Avatar2_SampleAssets/SampleAssets/SampleAssets/*.zip
+Assets/StreamingAssets/SampleAssets/*.zip
 
 

@@ -88,7 +88,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Start",
+                    "name": "Menu",
                     "type": "Button",
                     "id": "fef5a315-7069-4049-8d35-334867c5248c",
                     "expectedControlType": "",
@@ -485,12 +485,12 @@
                 },
                 {
                     "name": "",
-                    "id": "dc675508-d03a-4215-839f-355f8cb8de86",
-                    "path": "<QuestProTouchController>/menu",
+                    "id": "4cae1dec-0bc3-4f94-a725-30971be585f5",
+                    "path": "<XRController>{LeftHand}/{MenuButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": ";XR",
-                    "action": "Start",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

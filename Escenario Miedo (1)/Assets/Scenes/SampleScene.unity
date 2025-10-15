@@ -62902,6 +62902,48 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 861635253}
   m_SourcePrefab: {fileID: 100100000, guid: 359554047b9fbfd46a131cd670d20193, type: 3}
+--- !u!114 &740222935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 0}
+  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  NameTextureParameter_baseColorTexture: _MainTex
+  NameTextureParameter_diffuseTexture: _MainTex
+  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
+  NameTextureParameter_specularGlossiness: _Specular
+  NameTextureParameter_normalTexture: _BumpMap
+  NameTextureParameter_occlusionTexture: _OcclusionMap
+  NameTextureParameter_emissiveTexture: _EmissiveMap
+  NameTextureParameter_flowTexture: _FlowMap
+  NameColorParameter_BaseColorFactor: _Color
+  UseColorParameter_BaseColorFactor: 0
+  NameFloatParameter_MetallicFactor: _Metallic
+  UseFloatParameter_MetallicFactor: 0
+  NameFloatParameter_RoughnessFactor: _Roughness
+  UseFloatParameter_RoughnessFactor: 0
+  NameColorParameter_DiffuseFactor: _Diffuse
+  UseColorParameter_DiffuseFactor: 0
+  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
+  Texture_SSSCurvatureTexture: {fileID: 0}
+  NameTextureParameter_SSSZHTexture: _SSSZHLUT
+  Texture_SSSZHTexture: {fileID: 0}
+  KeywordsEnumerations: []
+  KeywordsToEnable: []
+  NameFloatConstants: []
+  ValueFloatConstants: []
+  ExtensionConfiguration:
+    _extensionNames: []
+    _entryNamesPerExtension: []
+    _replacementNamesPerExtension: []
 --- !u!1 &741000771 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8619132554884902055, guid: 58b1bd48d99376c4f8ae58c6a2dfcbea, type: 3}
@@ -73793,7 +73835,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1406642236}
   m_Father: {fileID: 165749339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &812468730
@@ -108605,6 +108648,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7026650573164554758, guid: d5ab6df6d9405264eb76719366cc795b, type: 3}
+      propertyPath: loadingUIParent
+      value: 
+      objectReference: {fileID: 1406642235}
+    - target: {fileID: 7026650573164554758, guid: d5ab6df6d9405264eb76719366cc795b, type: 3}
+      propertyPath: progressBarFillImage
+      value: 
+      objectReference: {fileID: 2037182775}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -129787,6 +129838,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4622278060567028456, guid: 870d389605ecc104f942773ae3f0d37b, type: 3}
+--- !u!1 &1406642235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1332985205557787659, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+  m_PrefabInstance: {fileID: 1974601606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1406642236 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+  m_PrefabInstance: {fileID: 1974601606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1407450173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167937,6 +167998,107 @@ Transform:
   - {fileID: 1359655384}
   m_Father: {fileID: 1067667694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1974601606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 812468729}
+    m_Modifications:
+    - target: {fileID: 1332985205557787659, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_Name
+      value: MenuHoldProgressCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523258767318184720, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 812468730}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462998156859158104, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
 --- !u!1001 &1976163501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171527,6 +171689,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bee0127b26b625b449235df57de94269, type: 3}
   m_PrefabInstance: {fileID: 1969094295}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2037182775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6105180592003538887, guid: 3bde0a410d60aae4e9b9016b9b21bbdc, type: 3}
+  m_PrefabInstance: {fileID: 1974601606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2039968591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173831,48 +174004,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2116521997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  NameTextureParameter_baseColorTexture: _MainTex
-  NameTextureParameter_diffuseTexture: _MainTex
-  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
-  NameTextureParameter_specularGlossiness: _Specular
-  NameTextureParameter_normalTexture: _BumpMap
-  NameTextureParameter_occlusionTexture: _OcclusionMap
-  NameTextureParameter_emissiveTexture: _EmissiveMap
-  NameTextureParameter_flowTexture: _FlowMap
-  NameColorParameter_BaseColorFactor: _Color
-  UseColorParameter_BaseColorFactor: 0
-  NameFloatParameter_MetallicFactor: _Metallic
-  UseFloatParameter_MetallicFactor: 0
-  NameFloatParameter_RoughnessFactor: _Roughness
-  UseFloatParameter_RoughnessFactor: 0
-  NameColorParameter_DiffuseFactor: _Diffuse
-  UseColorParameter_DiffuseFactor: 0
-  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
-  Texture_SSSCurvatureTexture: {fileID: 0}
-  NameTextureParameter_SSSZHTexture: _SSSZHLUT
-  Texture_SSSZHTexture: {fileID: 0}
-  KeywordsEnumerations: []
-  KeywordsToEnable: []
-  NameFloatConstants: []
-  ValueFloatConstants: []
-  ExtensionConfiguration:
-    _extensionNames: []
-    _entryNamesPerExtension: []
-    _replacementNamesPerExtension: []
 --- !u!1 &2119211424
 GameObject:
   m_ObjectHideFlags: 0

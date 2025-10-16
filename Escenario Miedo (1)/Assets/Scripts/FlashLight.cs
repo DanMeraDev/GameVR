@@ -48,14 +48,20 @@ public class FlashLight : MonoBehaviour
     {
         // 👉 Detecta si está agarrado con Oculus
         if (grabbable.SelectingPointsCount > 0) // está agarrado
-        {
+        {   
+            // Desactiva la emisión de color blanco 
             render.materials[0].DisableKeyword("_EMISSION");
+            //Desactiva el outliner del objeto 
+            if (render.materials.Length > 1)
+                render.materials[1].SetFloat("_Outline_Thickness", 0f);
             if (!luzEncendida)
                 EncenderLinterna();
         }
         else
         {
-            render.materials[0].EnableKeyword("_EMISSION");
+            render.materials[0].DisableKeyword("_EMISSION");
+            if (render.materials.Length > 1)
+                render.materials[1].SetFloat("_Outline_Thickness", 0.002999999f);
             if (luzEncendida)
                 ApagarLinterna();
         }

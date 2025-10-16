@@ -8963,6 +8963,48 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &338513756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 0}
+  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  NameTextureParameter_baseColorTexture: _MainTex
+  NameTextureParameter_diffuseTexture: _MainTex
+  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
+  NameTextureParameter_specularGlossiness: _Specular
+  NameTextureParameter_normalTexture: _BumpMap
+  NameTextureParameter_occlusionTexture: _OcclusionMap
+  NameTextureParameter_emissiveTexture: _EmissiveMap
+  NameTextureParameter_flowTexture: _FlowMap
+  NameColorParameter_BaseColorFactor: _Color
+  UseColorParameter_BaseColorFactor: 0
+  NameFloatParameter_MetallicFactor: _Metallic
+  UseFloatParameter_MetallicFactor: 0
+  NameFloatParameter_RoughnessFactor: _Roughness
+  UseFloatParameter_RoughnessFactor: 0
+  NameColorParameter_DiffuseFactor: _Diffuse
+  UseColorParameter_DiffuseFactor: 0
+  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
+  Texture_SSSCurvatureTexture: {fileID: 0}
+  NameTextureParameter_SSSZHTexture: _SSSZHLUT
+  Texture_SSSZHTexture: {fileID: 0}
+  KeywordsEnumerations: []
+  KeywordsToEnable: []
+  NameFloatConstants: []
+  ValueFloatConstants: []
+  ExtensionConfiguration:
+    _extensionNames: []
+    _entryNamesPerExtension: []
+    _replacementNamesPerExtension: []
 --- !u!1001 &345066242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15353,6 +15395,75 @@ Transform:
   - {fileID: 1991490718}
   m_Father: {fileID: 1509564147}
   m_LocalEulerAnglesHint: {x: 0, y: 158.784, z: 0}
+--- !u!1001 &553814493
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.041119736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.041119736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.041119736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 99.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6000006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95664924
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.028112896
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.27257425
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.09866736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 6.176
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -31.264
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 10.048
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
+      propertyPath: m_Name
+      value: Corvette-F3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d474e86f52a6ee74f9617a3e91ec38f8, type: 3}
 --- !u!114 &559054188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7156457363469234586, guid: 02be8ca9b972f334eada58d3cfb97909, type: 3}
@@ -47482,7 +47593,7 @@ GameObject:
   - component: {fileID: 2014651725}
   - component: {fileID: 2014651724}
   m_Layer: 0
-  m_Name: PortalTristeza
+  m_Name: PortalFelicidad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50081,48 +50192,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &2145824218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  NameTextureParameter_baseColorTexture: _MainTex
-  NameTextureParameter_diffuseTexture: _MainTex
-  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
-  NameTextureParameter_specularGlossiness: _Specular
-  NameTextureParameter_normalTexture: _BumpMap
-  NameTextureParameter_occlusionTexture: _OcclusionMap
-  NameTextureParameter_emissiveTexture: _EmissiveMap
-  NameTextureParameter_flowTexture: _FlowMap
-  NameColorParameter_BaseColorFactor: _Color
-  UseColorParameter_BaseColorFactor: 0
-  NameFloatParameter_MetallicFactor: _Metallic
-  UseFloatParameter_MetallicFactor: 0
-  NameFloatParameter_RoughnessFactor: _Roughness
-  UseFloatParameter_RoughnessFactor: 0
-  NameColorParameter_DiffuseFactor: _Diffuse
-  UseColorParameter_DiffuseFactor: 0
-  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
-  Texture_SSSCurvatureTexture: {fileID: 0}
-  NameTextureParameter_SSSZHTexture: _SSSZHLUT
-  Texture_SSSZHTexture: {fileID: 0}
-  KeywordsEnumerations: []
-  KeywordsToEnable: []
-  NameFloatConstants: []
-  ValueFloatConstants: []
-  ExtensionConfiguration:
-    _extensionNames: []
-    _entryNamesPerExtension: []
-    _replacementNamesPerExtension: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -50144,3 +50213,4 @@ SceneRoots:
   - {fileID: 513715948}
   - {fileID: 900555861}
   - {fileID: 1509564147}
+  - {fileID: 553814493}

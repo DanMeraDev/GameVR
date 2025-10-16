@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPrincipal.unity
     guid: 63415a2154f002442a36e49f58d83d0f
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/EscenarioTerror.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Escenario Ira.unity
+    path: Assets/Scenes/EscenarioIra.unity
     guid: e7166851c3deab94f947ab52ee5d3f58
   - enabled: 1
-    path: Assets/Scenes/Tristeza.unity
+    path: Assets/Scenes/EscenarioFelicidad.unity
     guid: 7a3131e2c521fd340b0314adadee6245
   - enabled: 1
     path: Assets/Scenes/LoadScene.unity

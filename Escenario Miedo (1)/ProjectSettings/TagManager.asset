@@ -38,6 +38,7 @@ TagManager:
   - QDSUITextInputField
   - SamplesInfoPanel
   - QDSUIToggleCheckboxRadio
+  - Pelota
   layers:
   - Default
   - TransparentFX

@@ -55,7 +55,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,6 +100,15 @@
                     "name": "NextScene",
                     "type": "Button",
                     "id": "5860a83c-2194-4da0-8193-92a5bad20a7b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CallDog",
+                    "type": "Button",
+                    "id": "de3a0871-c41b-4add-8cfb-a5f8e2118697",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -511,6 +520,17 @@
                     "processors": "",
                     "groups": ";XR",
                     "action": "NextScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "200cad9a-6773-4dc3-9ad2-3eb982a1870f",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CallDog",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -19,6 +19,10 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
     public float chaseSpeed = 5.0f;
     public float rotationSpeed = 5.0f;
 
+    [Header("Attack Settings")]
+    public float attackCooldown = 1.5f; // Tiempo en segundos entre cada golpe
+    private float lastAttackTime = -99f;
+
     // Componentes y estado interno
     private Rigidbody rb;
     public AudioSource[] audioSourceArray;
@@ -245,6 +249,25 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
         {
              Gizmos.color = Color.green; // Camino despejado
              Gizmos.DrawLine(eyePosition, eyePosition + directionToPlayerHead.normalized * visionRange);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (GameObject.Find("IndicadorDaño") != null)
+        {
+            // Comprobamos si hemos chocado con el jugador Y si ha pasado el tiempo de cooldown.
+            if (collision.gameObject.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
+            {
+                // Intentamos obtener el script de vida del objeto con el que chocamos.
+                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    Debug.Log("Enemigo ha golpeado al jugador.");
+                    playerHealth.TakeDamage(1); // Le quitamos 1 punto de vida
+                    lastAttackTime = Time.time; // Reseteamos el contador del cooldown
+                }
+            }
         }
     }
 }

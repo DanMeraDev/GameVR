@@ -39,6 +39,7 @@ public class noWInScript : MonoBehaviour
             signalText.text = newText;
             Invoke("ChangeScene", 5f);
             alreadyTriggered = true;
+            SceneMessenger.LoadMenu();
         }
         else
         { 

@@ -9,7 +9,8 @@ public class UnlockDoorScript : MonoBehaviour
     public AudioClip wrongSound;
     public AudioClip rigthSound;
     private AudioSource source;
-    public LedIndicator ledIndicator;
+    public LedIndicator ledIndicator1;
+    public LedIndicator ledIndicator2;
     public bool doorLock = true;
 
     void Start()
@@ -34,17 +35,20 @@ public class UnlockDoorScript : MonoBehaviour
                 OculusController.SetActive(true);
                 jointRigidBody.isKinematic = false;
                 source.Play();
-                ledIndicator.SetLedColor(Color.green);
+                ledIndicator1.SetLedColor(Color.green);
+                ledIndicator2.SetLedColor(Color.green);
                 doorLock=false;
             }
             else
             {
                 // Llave incorrecta → empieza a titilar en rojo
                 source.clip = wrongSound;
-                ledIndicator.SetLedColor(Color.red);
+                ledIndicator1.SetLedColor(Color.red);
+                ledIndicator2.SetLedColor(Color.red);
                 
                 source.Play();
-                ledIndicator.startFlick();
+                ledIndicator1.startFlick();
+                ledIndicator2.startFlick();
 
 
 

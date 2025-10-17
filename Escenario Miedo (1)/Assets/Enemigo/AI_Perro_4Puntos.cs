@@ -1,44 +1,55 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // NUEVO: Necesario para usar el nuevo Input System.
+using UnityEngine.InputSystem;
 
 public class AI_Perro_4Puntos : MonoBehaviour
 {
+    // Define los posibles estados del perro para organizar su comportamiento.
+    public enum DogState
+    {
+        Patrolling,     // Dando vueltas entre los puntos de patrulla.
+        Following,      // Siguiendo al jugador.
+        Fetching,       // Corriendo hacia la pelota.
+        ReturningBall   // Volviendo hacia el jugador con la pelota.
+    }
+    private DogState currentState;
+
     [Header("Input Action")]
     [Tooltip("Asigna aquí la acción de Input para llamar/dejar de seguir al perro.")]
-    public InputActionReference followButton; // NUEVO: Referencia para el botón de VR.
+    public InputActionReference followButton;
 
-    [Header("Targets")]
+    [Header("Targets & Fetch")]
     [Tooltip("Arrastra aquí todos los puntos de patrulla. El perro los seguirá en orden.")]
     public Transform[] patrolPoints;
     [Tooltip("Arrastra aquí la Cámara Principal (OVRHmd) del jugador de VR.")]
     public Transform playerHead;
-
-    [Header("Detection")]
-    public float visionRange = 10f; // MODIFICADO: Esto ahora solo sirve para el volumen del audio y los gizmos.
-    [Tooltip("El ángulo del cono de visión del enemigo (en grados).")]
-    public float visionAngle = 90f;
-    // public float timeToReturnToPatrol = 5f; // MODIFICADO: Ya no es necesario.
+    [Tooltip("Crea un objeto vacío delante de la boca del perro y arrástralo aquí.")]
+    public Transform mouthHoldPoint;
+    [Tooltip("¿A qué distancia tiene que estar el perro para considerar que ha llegado a un objetivo?")]
+    public float arrivalDistance = 1.5f;
+    private Transform targetBall; // Referencia interna a la pelota que debe buscar.
 
     [Header("Movement Settings")]
     public float patrolSpeed = 2.0f;
     public float chaseSpeed = 5.0f;
     public float rotationSpeed = 5.0f;
 
+    [Header("Detection")]
+    [Tooltip("Este rango ahora se usa para el audio y para detectar pelotas lanzadas.")]
+    public float detectionRange = 20f;
+
     // Componentes y estado interno
     private Rigidbody rb;
-    public AudioSource[] audioSourceArray;
     private Animator animator;
     private Transform currentTarget;
     private int currentPatrolIndex;
-    private bool isFollowingPlayer = false; // MODIFICADO: Renombrada de 'chasingPlayer' para más claridad.
-    // private float playerLostTime = 0f; // MODIFICADO: Ya no es necesario.
 
-    //Componente de Audio
     [Header("Audio")]
-    public AudioSource screamSound; // Puedes renombrar esta variable si ya no es un grito.
-    public AudioSource audioSource;
+    public AudioSource[] audioSourceArray;
+    public AudioSource walkAudioSource; // Pasos
+    public AudioSource interactionAudioSource; // Ladridos, etc.
 
-    // NUEVO: Suscripción a los eventos del Input System.
+
+    // Suscripción a los eventos del Input System
     private void OnEnable()
     {
         if (followButton != null)
@@ -48,7 +59,7 @@ public class AI_Perro_4Puntos : MonoBehaviour
         }
     }
 
-    // NUEVO: Desuscripción para evitar errores.
+    // Desuscripción para evitar errores
     private void OnDisable()
     {
         if (followButton != null)
@@ -63,48 +74,53 @@ public class AI_Perro_4Puntos : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
-            Debug.LogError("El enemigo '" + gameObject.name + "' necesita un Rigidbody.");
-            this.enabled = false;
-            return;
+            Debug.LogError("El perro necesita un componente Rigidbody.");
+            this.enabled = false; return;
         }
         rb.freezeRotation = true;
-
-        audioSourceArray = GetComponents<AudioSource>();
-        if (audioSourceArray.Length >= 1) audioSource = audioSourceArray[0];
-        if (audioSourceArray.Length >= 2) screamSound = audioSourceArray[1];
-        if (audioSource != null)
-        {
-            audioSource.volume = 0;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
 
         animator = GetComponentInChildren<Animator>();
         if (animator == null)
         {
-            Debug.LogWarning("El enemigo '" + gameObject.name + "' no tiene un componente Animator.");
+            Debug.LogWarning("El perro no tiene un Animator en sus hijos.");
+        }
+
+        audioSourceArray = GetComponents<AudioSource>();
+        if (audioSourceArray.Length >= 1) walkAudioSource = audioSourceArray[0];
+        if (audioSourceArray.Length >= 2) interactionAudioSource = audioSourceArray[1];
+        if (walkAudioSource != null)
+        {
+            walkAudioSource.volume = 0;
+            walkAudioSource.loop = true;
+            walkAudioSource.Play();
         }
 
         if (patrolPoints == null || patrolPoints.Length == 0)
         {
-            Debug.LogError("No se han asignado puntos de patrulla en el array 'patrolPoints'.");
-            this.enabled = false;
-            return;
+            Debug.LogError("No se han asignado puntos de patrulla.");
+            this.enabled = false; return;
         }
+        if (mouthHoldPoint == null)
+        {
+            Debug.LogError("Asigna un Transform a 'mouthHoldPoint' para que el perro sepa dónde sujetar la pelota.");
+        }
+
+        // El perro empieza patrullando
+        currentState = DogState.Patrolling;
         currentPatrolIndex = 0;
         currentTarget = patrolPoints[currentPatrolIndex];
     }
 
-    // NUEVO: Esta función se llamará cada vez que presiones el botón asignado.
+    // Se llama cuando se presiona el botón asignado
     private void ToggleFollowState(InputAction.CallbackContext context)
     {
-        isFollowingPlayer = !isFollowingPlayer; // Invierte el estado actual (si está siguiendo, deja de seguir, y viceversa).
-
-        if (!isFollowingPlayer)
+        // Solo se puede cambiar entre seguir y patrullar.
+        // Si está ocupado buscando la pelota, el botón no hace nada.
+        if (currentState == DogState.Following)
         {
-            // Si deja de seguir, busca el punto de patrulla más cercano para continuar.
+            currentState = DogState.Patrolling;
             currentTarget = GetClosestPatrolPoint();
-            // Actualizamos el índice para que la patrulla continúe desde ese punto.
+            // Actualizamos el índice para que la patrulla continúe desde ese punto
             for (int i = 0; i < patrolPoints.Length; i++)
             {
                 if (patrolPoints[i] == currentTarget)
@@ -114,112 +130,192 @@ public class AI_Perro_4Puntos : MonoBehaviour
                 }
             }
         }
-        // Si empieza a seguir, no necesitamos hacer nada especial aquí,
-        // el FixedUpdate se encargará de moverlo hacia el jugador.
+        else if (currentState == DogState.Patrolling)
+        {
+            currentState = DogState.Following;
+        }
     }
 
-
-    // MODIFICADO: La lógica de Update ahora es mucho más simple.
     void Update()
     {
-        // La lógica de persecución ya no se decide aquí. Solo actualizamos efectos visuales/auditivos.
-        SetCameraShake(isFollowingPlayer);
-        HandleScareAudio(isFollowingPlayer); // Puedes ajustar esto si el sonido ya no es de miedo.
-
-        if (playerHead != null)
+        // Si el perro te está siguiendo, comprueba constantemente si has lanzado una pelota.
+        if (currentState == DogState.Following)
         {
-            Vector3 enemyPosOnPlane = new Vector3(transform.position.x, 0, transform.position.z);
-            Vector3 playerPosOnPlane = new Vector3(playerHead.position.x, 0, playerHead.position.z);
-            UpdateAudioVolume(Vector3.Distance(enemyPosOnPlane, playerPosOnPlane));
+            CheckForThrownBall();
+        }
+
+        // Actualiza el volumen del audio de los pasos según la distancia
+        if (playerHead != null && walkAudioSource != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, playerHead.position);
+            UpdateAudioVolume(distanceToPlayer);
         }
     }
 
-    void HandleScareAudio(bool follow)
+    // Busca pelotas que hayan sido lanzadas cerca
+    void CheckForThrownBall()
     {
-        if (screamSound == null) return;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
+        foreach (var col in colliders)
+        {
+            // Si encuentra un objeto con el tag "Pelota"
+            if (col.CompareTag("Pelota"))
+            {
+                Rigidbody ballRb = col.GetComponent<Rigidbody>();
+                // Comprueba que la pelota no esté quieta y en el suelo
+                if (ballRb != null && ballRb.IsSleeping())
+                {
+                    // Y que esté suficientemente lejos del jugador para considerarla "lanzada"
+                    if (Vector3.Distance(playerHead.position, col.transform.position) > 3f)
+                    {
+                        // ¡Pelota encontrada! Iniciamos la mecánica de búsqueda.
+                        StartFetching(col.transform);
+                        break; // Salimos del bucle para que solo vaya a por una.
+                    }
+                }
+            }
+        }
+    }
 
-        if (follow)
-        {
-            if (!screamSound.isPlaying) screamSound.Play(); // Quizás cambiar a un sonido de "ladrido feliz".
-        }
-        else
-        {
-            if (screamSound.isPlaying) screamSound.Stop();
-        }
+    // Método público que inicia el estado de búsqueda (podría ser llamado desde otro script si fuera necesario)
+    public void StartFetching(Transform ball)
+    {
+        targetBall = ball;
+        currentState = DogState.Fetching;
+        Debug.Log("¡A buscar la pelota!");
     }
 
     void FixedUpdate()
     {
+        // Actualiza la animación de velocidad
         if (animator != null)
         {
             float currentSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
             animator.SetFloat("Speed", currentSpeed);
         }
 
-        if (isFollowingPlayer) // MODIFICADO: Usa la nueva variable de estado.
+        // Máquina de estados: ejecuta la lógica correspondiente al estado actual del perro.
+        switch (currentState)
         {
-            // El objetivo es la posición del jugador.
-            Vector3 followPosition = new Vector3(playerHead.position.x, transform.position.y, playerHead.position.z);
-            MoveTowardsPosition(followPosition, chaseSpeed);
-        }
-        else // Lógica de Patrulla (sin cambios)
-        {
-            if (currentTarget == null) return;
-
-            Vector3 patrolTargetPosition = currentTarget.position;
-            MoveTowardsPosition(patrolTargetPosition, patrolSpeed);
-
-            Vector3 positionOnPlane = new Vector3(transform.position.x, 0, transform.position.z);
-            Vector3 targetOnPlane = new Vector3(currentTarget.position.x, 0, currentTarget.position.z);
-            if (Vector3.Distance(positionOnPlane, targetOnPlane) < 1.0f)
-            {
-                rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-                currentTarget = patrolPoints[currentPatrolIndex];
-            }
+            case DogState.Patrolling:
+                HandlePatrolling();
+                break;
+            case DogState.Following:
+                HandleFollowing();
+                break;
+            case DogState.Fetching:
+                HandleFetching();
+                break;
+            case DogState.ReturningBall:
+                HandleReturningBall();
+                break;
         }
     }
-    
-    // El resto de funciones (MoveTowardsPosition, UpdateAudioVolume, SetCameraShake, GetClosestPatrolPoint, OnDrawGizmosSelected)
-    // pueden permanecer exactamente igual, ya que son funciones de ayuda que aún necesitamos.
-    // La función CanSeePlayer() ya no se llama desde Update, pero la puedes dejar por si la usas para otra cosa (como un ladrido).
 
+    #region Handlers de Estados
+    void HandlePatrolling()
+    {
+        if (currentTarget == null) return;
+
+        MoveTowardsPosition(currentTarget.position, patrolSpeed);
+
+        // Si llega al punto de patrulla, va al siguiente
+        if (Vector3.Distance(transform.position, currentTarget.position) < arrivalDistance)
+        {
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+            currentTarget = patrolPoints[currentPatrolIndex];
+        }
+    }
+
+    void HandleFollowing()
+    {
+        MoveTowardsPosition(playerHead.position, chaseSpeed);
+    }
+
+    void HandleFetching()
+    {
+        if (targetBall == null)
+        {
+            currentState = DogState.Following; // Si la pelota desaparece, vuelve a seguir.
+            return;
+        }
+
+        MoveTowardsPosition(targetBall.position, chaseSpeed);
+
+        // Si llega a la pelota...
+        if (Vector3.Distance(transform.position, targetBall.position) < arrivalDistance)
+        {
+            PickUpBall();
+        }
+    }
+
+    void HandleReturningBall()
+    {
+        if (targetBall == null)
+        {
+            currentState = DogState.Following; // Seguridad por si la pelota desaparece
+            return;
+        }
+
+        MoveTowardsPosition(playerHead.position, chaseSpeed);
+
+        // Si llega cerca del jugador...
+        if (Vector3.Distance(transform.position, playerHead.position) < arrivalDistance + 1f)
+        {
+            DropBall();
+        }
+    }
+    #endregion
+
+    #region Lógica de la Pelota
+    void PickUpBall()
+    {
+        Rigidbody ballRb = targetBall.GetComponent<Rigidbody>();
+        if (ballRb != null) ballRb.isKinematic = true; // Desactivamos las físicas.
+
+        targetBall.GetComponent<Collider>().enabled = false; // ¡LÍNEA CLAVE! Desactivamos el collider para evitar la colisión.
+
+        targetBall.SetParent(mouthHoldPoint); // La hacemos hija del punto en la boca.
+        targetBall.localPosition = Vector3.zero; // La centramos perfectamente.
+
+        currentState = DogState.ReturningBall; // Cambiamos al estado de "volver contigo".
+        Debug.Log("¡Tengo la pelota!");
+    }
+
+    void DropBall()
+    {
+        Rigidbody ballRb = targetBall.GetComponent<Rigidbody>();
+        targetBall.SetParent(null); // La "soltamos".
+
+        targetBall.GetComponent<Collider>().enabled = true; // ¡LÍNEA CLAVE! Reactivamos el collider para que vuelva a ser un objeto físico.
+
+        if (ballRb != null) ballRb.isKinematic = false; // Reactivamos sus físicas.
+
+        // Opcional: darle un pequeño empujón hacia el jugador.
+        ballRb.AddForce((playerHead.position - transform.position).normalized * 2f, ForceMode.Impulse);
+
+        targetBall = null; // Olvidamos la pelota.
+        currentState = DogState.Following; // Volvemos al estado de seguirte.
+        Debug.Log("¡Aquí tienes!");
+    }
+    #endregion
+
+    #region Funciones de Utilidad
     void MoveTowardsPosition(Vector3 targetPosition, float speed)
     {
         Vector3 direction = targetPosition - transform.position;
-        direction.y = 0;
+        direction.y = 0; // Nos aseguramos de que no intente moverse verticalmente.
 
-        if (direction.sqrMagnitude > 0.001f)
+        if (direction.sqrMagnitude > 0.01f) // Evita rotaciones extrañas cuando está muy cerca.
         {
+            // Rotación suave hacia el objetivo
             Quaternion lookRotation = Quaternion.LookRotation(direction.normalized);
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * rotationSpeed));
         }
 
+        // Movimiento hacia el objetivo
         Vector3 targetVelocity = direction.normalized * speed;
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
-    }
-
-    void UpdateAudioVolume(float distance)
-    {
-        if (audioSource == null) return;
-        if (distance > visionRange)
-        {
-            audioSource.volume = 0;
-            return;
-        }
-        float targetVolume = 1.0f - (distance / visionRange);
-        audioSource.volume = Mathf.Clamp01(targetVolume);
-    }
-
-    void SetCameraShake(bool state)
-    {
-        if (playerHead == null) return;
-        // La referencia a CameraShake podría no existir, así que hay que ser cuidadosos.
-        CameraShake cameraShake = playerHead.root.GetComponentInChildren<CameraShake>();
-        if (cameraShake != null)
-        {
-            cameraShake.SetShake(state);
-        }
     }
 
     Transform GetClosestPatrolPoint()
@@ -240,43 +336,16 @@ public class AI_Perro_4Puntos : MonoBehaviour
         return closestPoint;
     }
 
-    private void OnDrawGizmosSelected()
+    void UpdateAudioVolume(float distance)
     {
-        if (playerHead == null) return;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, visionRange);
-
-        Vector3 fovLine1 = Quaternion.AngleAxis(visionAngle / 2, transform.up) * transform.forward * visionRange;
-        Vector3 fovLine2 = Quaternion.AngleAxis(-visionAngle / 2, transform.up) * transform.forward * visionRange;
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(transform.position, fovLine1);
-        Gizmos.DrawRay(transform.position, fovLine2);
-
-        if (playerHead != null)
+        if (walkAudioSource == null) return;
+        if (distance > detectionRange)
         {
-            Vector3 eyePosition = transform.position + Vector3.up;
-            Vector3 directionToPlayerHead = playerHead.position - eyePosition;
-            RaycastHit hit;
-            if (Physics.Raycast(eyePosition, directionToPlayerHead, out hit, visionRange))
-            {
-                if(hit.collider.transform.root.CompareTag("Player"))
-                {
-                    Gizmos.color = Color.red; // Ve al jugador
-                    Gizmos.DrawLine(eyePosition, hit.point);
-                }
-                else
-                {
-                    Gizmos.color = Color.magenta; // Choca con una pared
-                    Gizmos.DrawLine(eyePosition, hit.point);
-                }
-            }
-            else
-            {
-                Gizmos.color = Color.green; // Camino despejado
-                Gizmos.DrawLine(eyePosition, eyePosition + directionToPlayerHead.normalized * visionRange);
-            }
+            walkAudioSource.volume = 0;
+            return;
         }
+        float targetVolume = 1.0f - (distance / detectionRange);
+        walkAudioSource.volume = Mathf.Clamp01(targetVolume);
     }
+    #endregion
 }
-    

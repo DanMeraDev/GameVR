@@ -114,13 +114,10 @@ public class AI_Perro_4Puntos : MonoBehaviour
     // Se llama cuando se presiona el botón asignado
     private void ToggleFollowState(InputAction.CallbackContext context)
     {
-        // Solo se puede cambiar entre seguir y patrullar.
-        // Si está ocupado buscando la pelota, el botón no hace nada.
         if (currentState == DogState.Following)
         {
             currentState = DogState.Patrolling;
             currentTarget = GetClosestPatrolPoint();
-            // Actualizamos el índice para que la patrulla continúe desde ese punto
             for (int i = 0; i < patrolPoints.Length; i++)
             {
                 if (patrolPoints[i] == currentTarget)
@@ -138,13 +135,10 @@ public class AI_Perro_4Puntos : MonoBehaviour
 
     void Update()
     {
-        // Si el perro te está siguiendo, comprueba constantemente si has lanzado una pelota.
         if (currentState == DogState.Following)
         {
             CheckForThrownBall();
         }
-
-        // Actualiza el volumen del audio de los pasos según la distancia
         if (playerHead != null && walkAudioSource != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerHead.position);
@@ -152,32 +146,31 @@ public class AI_Perro_4Puntos : MonoBehaviour
         }
     }
 
-    // Busca pelotas que hayan sido lanzadas cerca
+    // MODIFICADO: Busca pelotas que estén en movimiento y no estén siendo sujetadas.
     void CheckForThrownBall()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
         foreach (var col in colliders)
         {
-            // Si encuentra un objeto con el tag "Pelota"
             if (col.CompareTag("Pelota"))
             {
                 Rigidbody ballRb = col.GetComponent<Rigidbody>();
-                // Comprueba que la pelota no esté quieta y en el suelo
-                if (ballRb != null && ballRb.IsSleeping())
+                // CONDICIÓN 1: La pelota debe tener un Rigidbody.
+                // CONDICIÓN 2: La velocidad de la pelota debe ser superior a un umbral (ej. 0.5f).
+                // CONDICIÓN 3: La pelota NO debe tener un padre (transform.parent == null), para no cogerla de la mano del jugador.
+                if (ballRb != null && ballRb.linearVelocity.magnitude > 0.5f && col.transform.parent == null)
                 {
-                    // Y que esté suficientemente lejos del jugador para considerarla "lanzada"
-                    if (Vector3.Distance(playerHead.position, col.transform.position) > 3f)
+                    // Mantenemos una distancia mínima para evitar que vaya a por la pelota si solo se nos cae a los pies.
+                    if (Vector3.Distance(playerHead.position, col.transform.position) > 2f)
                     {
-                        // ¡Pelota encontrada! Iniciamos la mecánica de búsqueda.
                         StartFetching(col.transform);
-                        break; // Salimos del bucle para que solo vaya a por una.
+                        break;
                     }
                 }
             }
         }
     }
 
-    // Método público que inicia el estado de búsqueda (podría ser llamado desde otro script si fuera necesario)
     public void StartFetching(Transform ball)
     {
         targetBall = ball;
@@ -187,14 +180,12 @@ public class AI_Perro_4Puntos : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Actualiza la animación de velocidad
         if (animator != null)
         {
             float currentSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
             animator.SetFloat("Speed", currentSpeed);
         }
 
-        // Máquina de estados: ejecuta la lógica correspondiente al estado actual del perro.
         switch (currentState)
         {
             case DogState.Patrolling:
@@ -216,10 +207,7 @@ public class AI_Perro_4Puntos : MonoBehaviour
     void HandlePatrolling()
     {
         if (currentTarget == null) return;
-
         MoveTowardsPosition(currentTarget.position, patrolSpeed);
-
-        // Si llega al punto de patrulla, va al siguiente
         if (Vector3.Distance(transform.position, currentTarget.position) < arrivalDistance)
         {
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
@@ -236,13 +224,10 @@ public class AI_Perro_4Puntos : MonoBehaviour
     {
         if (targetBall == null)
         {
-            currentState = DogState.Following; // Si la pelota desaparece, vuelve a seguir.
+            currentState = DogState.Following;
             return;
         }
-
         MoveTowardsPosition(targetBall.position, chaseSpeed);
-
-        // Si llega a la pelota...
         if (Vector3.Distance(transform.position, targetBall.position) < arrivalDistance)
         {
             PickUpBall();
@@ -253,13 +238,10 @@ public class AI_Perro_4Puntos : MonoBehaviour
     {
         if (targetBall == null)
         {
-            currentState = DogState.Following; // Seguridad por si la pelota desaparece
+            currentState = DogState.Following;
             return;
         }
-
         MoveTowardsPosition(playerHead.position, chaseSpeed);
-
-        // Si llega cerca del jugador...
         if (Vector3.Distance(transform.position, playerHead.position) < arrivalDistance + 1f)
         {
             DropBall();
@@ -271,31 +253,23 @@ public class AI_Perro_4Puntos : MonoBehaviour
     void PickUpBall()
     {
         Rigidbody ballRb = targetBall.GetComponent<Rigidbody>();
-        if (ballRb != null) ballRb.isKinematic = true; // Desactivamos las físicas.
-
-        targetBall.GetComponent<Collider>().enabled = false; // ¡LÍNEA CLAVE! Desactivamos el collider para evitar la colisión.
-
-        targetBall.SetParent(mouthHoldPoint); // La hacemos hija del punto en la boca.
-        targetBall.localPosition = Vector3.zero; // La centramos perfectamente.
-
-        currentState = DogState.ReturningBall; // Cambiamos al estado de "volver contigo".
+        if (ballRb != null) ballRb.isKinematic = true;
+        targetBall.GetComponent<Collider>().enabled = false;
+        targetBall.SetParent(mouthHoldPoint);
+        targetBall.localPosition = Vector3.zero;
+        currentState = DogState.ReturningBall;
         Debug.Log("¡Tengo la pelota!");
     }
 
     void DropBall()
     {
         Rigidbody ballRb = targetBall.GetComponent<Rigidbody>();
-        targetBall.SetParent(null); // La "soltamos".
-
-        targetBall.GetComponent<Collider>().enabled = true; // ¡LÍNEA CLAVE! Reactivamos el collider para que vuelva a ser un objeto físico.
-
-        if (ballRb != null) ballRb.isKinematic = false; // Reactivamos sus físicas.
-
-        // Opcional: darle un pequeño empujón hacia el jugador.
+        targetBall.SetParent(null);
+        targetBall.GetComponent<Collider>().enabled = true;
+        if (ballRb != null) ballRb.isKinematic = false;
         ballRb.AddForce((playerHead.position - transform.position).normalized * 2f, ForceMode.Impulse);
-
-        targetBall = null; // Olvidamos la pelota.
-        currentState = DogState.Following; // Volvemos al estado de seguirte.
+        targetBall = null;
+        currentState = DogState.Following;
         Debug.Log("¡Aquí tienes!");
     }
     #endregion
@@ -304,16 +278,12 @@ public class AI_Perro_4Puntos : MonoBehaviour
     void MoveTowardsPosition(Vector3 targetPosition, float speed)
     {
         Vector3 direction = targetPosition - transform.position;
-        direction.y = 0; // Nos aseguramos de que no intente moverse verticalmente.
-
-        if (direction.sqrMagnitude > 0.01f) // Evita rotaciones extrañas cuando está muy cerca.
+        direction.y = 0;
+        if (direction.sqrMagnitude > 0.01f)
         {
-            // Rotación suave hacia el objetivo
             Quaternion lookRotation = Quaternion.LookRotation(direction.normalized);
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * rotationSpeed));
         }
-
-        // Movimiento hacia el objetivo
         Vector3 targetVelocity = direction.normalized * speed;
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
     }
@@ -323,7 +293,6 @@ public class AI_Perro_4Puntos : MonoBehaviour
         Transform closestPoint = null;
         float minDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-
         foreach (Transform point in patrolPoints)
         {
             float distance = Vector3.Distance(point.position, currentPosition);

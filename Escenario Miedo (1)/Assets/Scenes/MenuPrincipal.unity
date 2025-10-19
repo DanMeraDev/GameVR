@@ -415,6 +415,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7605932bc514945adb3803a0be2ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &67504346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 0}
+  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  NameTextureParameter_baseColorTexture: _MainTex
+  NameTextureParameter_diffuseTexture: _MainTex
+  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
+  NameTextureParameter_specularGlossiness: _Specular
+  NameTextureParameter_normalTexture: _BumpMap
+  NameTextureParameter_occlusionTexture: _OcclusionMap
+  NameTextureParameter_emissiveTexture: _EmissiveMap
+  NameTextureParameter_flowTexture: _FlowMap
+  NameColorParameter_BaseColorFactor: _Color
+  UseColorParameter_BaseColorFactor: 0
+  NameFloatParameter_MetallicFactor: _Metallic
+  UseFloatParameter_MetallicFactor: 0
+  NameFloatParameter_RoughnessFactor: _Roughness
+  UseFloatParameter_RoughnessFactor: 0
+  NameColorParameter_DiffuseFactor: _Diffuse
+  UseColorParameter_DiffuseFactor: 0
+  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
+  Texture_SSSCurvatureTexture: {fileID: 0}
+  NameTextureParameter_SSSZHTexture: _SSSZHLUT
+  Texture_SSSZHTexture: {fileID: 0}
+  KeywordsEnumerations: []
+  KeywordsToEnable: []
+  NameFloatConstants: []
+  ValueFloatConstants: []
+  ExtensionConfiguration:
+    _extensionNames: []
+    _entryNamesPerExtension: []
+    _replacementNamesPerExtension: []
 --- !u!114 &76428014 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3711920881140267179, guid: 02be8ca9b972f334eada58d3cfb97909, type: 3}
@@ -3750,48 +3792,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b10f61fafaa17374b85a4def5881de1c, type: 3}
---- !u!114 &306450868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  NameTextureParameter_baseColorTexture: _MainTex
-  NameTextureParameter_diffuseTexture: _MainTex
-  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
-  NameTextureParameter_specularGlossiness: _Specular
-  NameTextureParameter_normalTexture: _BumpMap
-  NameTextureParameter_occlusionTexture: _OcclusionMap
-  NameTextureParameter_emissiveTexture: _EmissiveMap
-  NameTextureParameter_flowTexture: _FlowMap
-  NameColorParameter_BaseColorFactor: _Color
-  UseColorParameter_BaseColorFactor: 0
-  NameFloatParameter_MetallicFactor: _Metallic
-  UseFloatParameter_MetallicFactor: 0
-  NameFloatParameter_RoughnessFactor: _Roughness
-  UseFloatParameter_RoughnessFactor: 0
-  NameColorParameter_DiffuseFactor: _Diffuse
-  UseColorParameter_DiffuseFactor: 0
-  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
-  Texture_SSSCurvatureTexture: {fileID: 0}
-  NameTextureParameter_SSSZHTexture: _SSSZHLUT
-  Texture_SSSZHTexture: {fileID: 0}
-  KeywordsEnumerations: []
-  KeywordsToEnable: []
-  NameFloatConstants: []
-  ValueFloatConstants: []
-  ExtensionConfiguration:
-    _extensionNames: []
-    _entryNamesPerExtension: []
-    _replacementNamesPerExtension: []
 --- !u!1001 &317032028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10620,6 +10620,7 @@ GameObject:
   - component: {fileID: 367080702}
   - component: {fileID: 367080704}
   - component: {fileID: 367080703}
+  - component: {fileID: 367080705}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
@@ -10706,6 +10707,22 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 0
   _handGrabPoses: []
+--- !u!114 &367080705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367080701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b2e578cb3cf6c43aad5941e693e4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationAmplitude: 0.6
+  vibrationFrequency: 1
+  vibrationDuration: 0.5
+  vibrationClip: {fileID: 8300000, guid: d20d43a312576964ca9be32194e44233, type: 3}
 --- !u!1 &367287744
 GameObject:
   m_ObjectHideFlags: 0
@@ -17085,7 +17102,7 @@ GameObject:
   - component: {fileID: 636657899}
   - component: {fileID: 636657902}
   - component: {fileID: 636657901}
-  - component: {fileID: 636657900}
+  - component: {fileID: 636657903}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
@@ -17108,22 +17125,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1748238319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &636657900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636657898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b2e578cb3cf6c43aad5941e693e4ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vibrationAmplitude: 0.5
-  vibrationFrequency: 1
-  vibrationDuration: 0.1
-  vibrationClip: {fileID: 8300000, guid: 725fb6aecd4e29e478a6fce6191210fe, type: 3}
 --- !u!114 &636657901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17188,6 +17189,22 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 0
   _handGrabPoses: []
+--- !u!114 &636657903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636657898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b2e578cb3cf6c43aad5941e693e4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationAmplitude: 0.6
+  vibrationFrequency: 1
+  vibrationDuration: 0.5
+  vibrationClip: {fileID: 8300000, guid: d20d43a312576964ca9be32194e44233, type: 3}
 --- !u!1 &639594661
 GameObject:
   m_ObjectHideFlags: 0
@@ -19799,11 +19816,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 900555861}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 19d09cc6dd031024095532e16ed9d2f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.871
+      value: -4.338999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d09cc6dd031024095532e16ed9d2f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19811,7 +19828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d09cc6dd031024095532e16ed9d2f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.517
+      value: 6.827
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d09cc6dd031024095532e16ed9d2f6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20457,6 +20474,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 857879736}
   - {fileID: 1748238319}
   - {fileID: 181024241}
   m_Father: {fileID: 0}
@@ -36791,6 +36809,7 @@ GameObject:
   - component: {fileID: 1369426500}
   - component: {fileID: 1369426502}
   - component: {fileID: 1369426501}
+  - component: {fileID: 1369426503}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
@@ -36877,6 +36896,22 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 0
   _handGrabPoses: []
+--- !u!114 &1369426503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369426499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b2e578cb3cf6c43aad5941e693e4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationAmplitude: 0.6
+  vibrationFrequency: 1
+  vibrationDuration: 0.5
+  vibrationClip: {fileID: 8300000, guid: d20d43a312576964ca9be32194e44233, type: 3}
 --- !u!1 &1369470961
 GameObject:
   m_ObjectHideFlags: 0
@@ -41895,48 +41930,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b85d72bc453302d4a8170c6af3569a62, type: 3}
---- !u!114 &1886375719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  NameTextureParameter_baseColorTexture: _MainTex
-  NameTextureParameter_diffuseTexture: _MainTex
-  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
-  NameTextureParameter_specularGlossiness: _Specular
-  NameTextureParameter_normalTexture: _BumpMap
-  NameTextureParameter_occlusionTexture: _OcclusionMap
-  NameTextureParameter_emissiveTexture: _EmissiveMap
-  NameTextureParameter_flowTexture: _FlowMap
-  NameColorParameter_BaseColorFactor: _Color
-  UseColorParameter_BaseColorFactor: 0
-  NameFloatParameter_MetallicFactor: _Metallic
-  UseFloatParameter_MetallicFactor: 0
-  NameFloatParameter_RoughnessFactor: _Roughness
-  UseFloatParameter_RoughnessFactor: 0
-  NameColorParameter_DiffuseFactor: _Diffuse
-  UseColorParameter_DiffuseFactor: 0
-  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
-  Texture_SSSCurvatureTexture: {fileID: 0}
-  NameTextureParameter_SSSZHTexture: _SSSZHLUT
-  Texture_SSSZHTexture: {fileID: 0}
-  KeywordsEnumerations: []
-  KeywordsToEnable: []
-  NameFloatConstants: []
-  ValueFloatConstants: []
-  ExtensionConfiguration:
-    _extensionNames: []
-    _entryNamesPerExtension: []
-    _replacementNamesPerExtension: []
 --- !u!1001 &1901572227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50264,7 +50257,6 @@ SceneRoots:
   - {fileID: 2047686184}
   - {fileID: 294712705}
   - {fileID: 541088939}
-  - {fileID: 857879734}
   - {fileID: 891624169}
   - {fileID: 183237195}
   - {fileID: 197389184}

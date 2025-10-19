@@ -56,21 +56,23 @@ public class GrapWithHapticSource : MonoBehaviour
 
         // 2. Imprime el objeto mismo para poder hacerle clic en la consola y verlo en la jerarquía.
         Debug.Log("Haz clic aquí para seleccionar el objeto interactor:", interactorMono.gameObject);
-        HandGrabInteractor handInteractor = interactorMono.GetComponent<HandGrabInteractor>();
+        ControllerRef handInteractor = interactorMono.GetComponent<ControllerRef>();
         Debug.Log("Log handInteractor");
         Debug.Log(handInteractor);
         if (handInteractor != null)
         {
-            Debug.Log("INtro Al vibrador");
+            Debug.Log("Intro Al vibrador");
             OVRInput.Controller controllerToVibrate = OVRInput.Controller.None;
 
-            if (handInteractor.Hand.Handedness == Handedness.Left)
+
+            if (handInteractor.Handedness == Handedness.Left)
             {
-                
+                Debug.Log("Vibra control izquierdo");
                 controllerToVibrate = OVRInput.Controller.LTouch;
             }
-            else if (handInteractor.Hand.Handedness == Handedness.Right)
+            else if (handInteractor.Handedness == Handedness.Right)
             {
+                Debug.Log("Vibra control derecho");
                 controllerToVibrate = OVRInput.Controller.RTouch;
             }
 
@@ -90,19 +92,7 @@ public class GrapWithHapticSource : MonoBehaviour
 
 
 
-    private void OnGrabbed(PointerEvent evt)
-    {
-        if (evt.Type == PointerEventType.Select)
-        {
 
-            // vibración corta
-            OVRInput.SetControllerVibration(1f, 0.5f, OVRInput.Controller.RTouch); // Right hand
-            OVRInput.SetControllerVibration(1f, 0.5f, OVRInput.Controller.LTouch); // Left hand
-
-            //Detener después de un tiempo corto
-            Invoke(nameof(StopHaptics), 0.2f);
-        }
-    }
 
     private void StopHaptics()
     {

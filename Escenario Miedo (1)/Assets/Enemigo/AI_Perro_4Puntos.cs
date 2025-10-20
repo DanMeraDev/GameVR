@@ -30,8 +30,15 @@ public class AI_Perro_4Puntos : MonoBehaviour
 
     [Header("Movement Settings")]
     public float patrolSpeed = 2.0f;
+    public float followSpeed = 2.5f;
     public float chaseSpeed = 5.0f;
     public float rotationSpeed = 5.0f;
+    [Tooltip("A qué distancia del jugador se detendrá el perro al seguirlo.")]
+    public float followStopDistance = 2.5f;
+    [Tooltip("Cuánto tiempo esperará el perro antes de seguir al jugador después de que se mueva.")]
+    public float followWaitTime = 1.0f;
+    [Tooltip("Cuánto tiempo esperará el perro antes de ir a buscar la pelota tras ser lanzada.")]
+    public float fetchWaitTime = 1.0f;      // ¡NUEVO!
 
     [Header("Detection")]
     [Tooltip("Este rango ahora se usa para el audio y para detectar pelotas lanzadas.")]
@@ -42,11 +49,16 @@ public class AI_Perro_4Puntos : MonoBehaviour
     private Animator animator;
     private Transform currentTarget;
     private int currentPatrolIndex;
+    private float followTimer = 0f; // Temporizador para el retardo al seguir.
+    private float fetchTimer = 0f;  // ¡NUEVO! Temporizador para el retardo al buscar la pelota.
 
     [Header("Audio")]
     public AudioSource[] audioSourceArray;
     public AudioSource walkAudioSource; // Pasos
     public AudioSource interactionAudioSource; // Ladridos, etc.
+
+    [Tooltip("El clip de audio del silbido que sonará al llamar al perro.")]
+    public AudioClip whistleSound; 
 
 
     // Suscripción a los eventos del Input System
@@ -71,6 +83,7 @@ public class AI_Perro_4Puntos : MonoBehaviour
 
     void Start()
     {
+        walkAudioSource.volume = 5f;
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -114,6 +127,12 @@ public class AI_Perro_4Puntos : MonoBehaviour
     // Se llama cuando se presiona el botón asignado
     private void ToggleFollowState(InputAction.CallbackContext context)
     {
+        //Reproducimos el sonido del silbido aquí.
+        if (interactionAudioSource != null && whistleSound != null)
+        {
+            interactionAudioSource.PlayOneShot(whistleSound);
+        }
+        
         if (currentState == DogState.Following)
         {
             currentState = DogState.Patrolling;
@@ -141,12 +160,15 @@ public class AI_Perro_4Puntos : MonoBehaviour
         }
         if (playerHead != null && walkAudioSource != null)
         {
+            // Calculamos la velocidad actual del perro
+            float currentSpeed = rb.linearVelocity.magnitude;
+            // Calculamos la distancia al jugador
             float distanceToPlayer = Vector3.Distance(transform.position, playerHead.position);
-            UpdateAudioVolume(distanceToPlayer);
+            // Pasamos AMBOS datos a la función que controla el volumen
+            UpdateAudioVolume(distanceToPlayer, currentSpeed);
         }
     }
 
-    // MODIFICADO: Busca pelotas que estén en movimiento y no estén siendo sujetadas.
     void CheckForThrownBall()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
@@ -155,12 +177,8 @@ public class AI_Perro_4Puntos : MonoBehaviour
             if (col.CompareTag("Pelota"))
             {
                 Rigidbody ballRb = col.GetComponent<Rigidbody>();
-                // CONDICIÓN 1: La pelota debe tener un Rigidbody.
-                // CONDICIÓN 2: La velocidad de la pelota debe ser superior a un umbral (ej. 0.5f).
-                // CONDICIÓN 3: La pelota NO debe tener un padre (transform.parent == null), para no cogerla de la mano del jugador.
                 if (ballRb != null && ballRb.linearVelocity.magnitude > 0.5f && col.transform.parent == null)
                 {
-                    // Mantenemos una distancia mínima para evitar que vaya a por la pelota si solo se nos cae a los pies.
                     if (Vector3.Distance(playerHead.position, col.transform.position) > 2f)
                     {
                         StartFetching(col.transform);
@@ -171,11 +189,13 @@ public class AI_Perro_4Puntos : MonoBehaviour
         }
     }
 
+    // MODIFICADO: Ahora también resetea el temporizador de búsqueda.
     public void StartFetching(Transform ball)
     {
         targetBall = ball;
         currentState = DogState.Fetching;
-        Debug.Log("¡A buscar la pelota!");
+        fetchTimer = 0f; // ¡NUEVO! Reiniciamos el temporizador.
+        Debug.Log("¡Pelota detectada! Esperando para ir a por ella...");
     }
 
     void FixedUpdate()
@@ -214,12 +234,35 @@ public class AI_Perro_4Puntos : MonoBehaviour
             currentTarget = patrolPoints[currentPatrolIndex];
         }
     }
-
+    
     void HandleFollowing()
     {
-        MoveTowardsPosition(playerHead.position, chaseSpeed);
+        Vector3 playerPositionOnPlane = new Vector3(playerHead.position.x, transform.position.y, playerHead.position.z);
+        float distanceToPlayer = Vector3.Distance(transform.position, playerPositionOnPlane);
+
+        if (distanceToPlayer > followStopDistance)
+        {
+            followTimer += Time.deltaTime;
+            if (followTimer >= followWaitTime)
+            {
+                Vector3 targetPosition = playerPositionOnPlane + playerHead.forward * followStopDistance * 0.8f;
+                MoveTowardsPosition(targetPosition, followSpeed);
+            }
+        }
+        else
+        {
+            StopMovement();
+            followTimer = 0f;
+            Vector3 directionToPlayer = playerPositionOnPlane - transform.position;
+            if (directionToPlayer.sqrMagnitude > 0.01f)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer.normalized);
+                rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * rotationSpeed));
+            }
+        }
     }
 
+    // MODIFICADO: Añadido el retardo de espera.
     void HandleFetching()
     {
         if (targetBall == null)
@@ -227,6 +270,27 @@ public class AI_Perro_4Puntos : MonoBehaviour
             currentState = DogState.Following;
             return;
         }
+
+        // Empezamos a contar el tiempo para el retardo de búsqueda.
+        fetchTimer += Time.fixedDeltaTime;
+
+        // Si aún no ha pasado el tiempo de espera, el perro no se mueve.
+        if(fetchTimer < fetchWaitTime)
+        {
+            StopMovement();
+            // Opcional: Hacer que el perro mire la pelota mientras espera.
+            Vector3 directionToBall = targetBall.position - transform.position;
+            directionToBall.y = 0;
+            if (directionToBall.sqrMagnitude > 0.01f)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(directionToBall.normalized);
+                rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * rotationSpeed));
+            }
+            return; // Salimos de la función para que no se mueva todavía.
+        }
+
+        // Si ya ha pasado el tiempo de espera, el perro corre hacia la pelota.
+        Debug.Log("¡A buscar la pelota!");
         MoveTowardsPosition(targetBall.position, chaseSpeed);
         if (Vector3.Distance(transform.position, targetBall.position) < arrivalDistance)
         {
@@ -241,7 +305,7 @@ public class AI_Perro_4Puntos : MonoBehaviour
             currentState = DogState.Following;
             return;
         }
-        MoveTowardsPosition(playerHead.position, chaseSpeed);
+        MoveTowardsPosition(playerHead.position,followSpeed);
         if (Vector3.Distance(transform.position, playerHead.position) < arrivalDistance + 1f)
         {
             DropBall();
@@ -275,6 +339,12 @@ public class AI_Perro_4Puntos : MonoBehaviour
     #endregion
 
     #region Funciones de Utilidad
+
+    void StopMovement()
+    {
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+    }
+    
     void MoveTowardsPosition(Vector3 targetPosition, float speed)
     {
         Vector3 direction = targetPosition - transform.position;
@@ -305,14 +375,26 @@ public class AI_Perro_4Puntos : MonoBehaviour
         return closestPoint;
     }
 
-    void UpdateAudioVolume(float distance)
+    void UpdateAudioVolume(float distance, float speed)
     {
         if (walkAudioSource == null) return;
+
+        // CONDICIÓN 1: Si el perro está casi quieto, el volumen es CERO.
+        // Usamos un umbral pequeño (0.1f) para evitar que el sonido se corte por micro-movimientos.
+        if (speed < 0.1f)
+        {
+            walkAudioSource.volume = 0;
+            return;
+        }
+
+        // CONDICIÓN 2: Si se está moviendo, calculamos el volumen basado en la distancia.
         if (distance > detectionRange)
         {
             walkAudioSource.volume = 0;
             return;
         }
+
+        // Si se está moviendo Y está cerca, el sonido tiene volumen.
         float targetVolume = 1.0f - (distance / detectionRange);
         walkAudioSource.volume = Mathf.Clamp01(targetVolume);
     }

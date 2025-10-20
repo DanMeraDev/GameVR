@@ -23,11 +23,17 @@ public class VRLoadingScreen : MonoBehaviour
     public float rotationSpeed = 1.0f;
     [Tooltip("Tiempo que tarda el fade a negro")]
     public float fadeDuration = 1.0f;
+
+    //Sonido de instrucciones
     [Header("Voces de instrucciones")]
     public AudioClip fearSound;
     public AudioClip wrathSound;
     public AudioClip happySound;
     private AudioSource oneShotSource;
+
+    //Musica de fondo
+    public AudioSource musicSource;
+    public AudioClip horrorClip;
 
     //Inputsystem
 
@@ -80,6 +86,8 @@ public class VRLoadingScreen : MonoBehaviour
                 instructionText.text = "Bienvenido de vuelta al cuarto de portales";
                 break;
             case 1:
+                musicSource.clip = horrorClip;
+                musicSource.Play();
                 instructionText.text = "Encuentra las llaves de colores y úsalas en los lectores correspondientes para abrir las puertas. Halla la llave del pasillo final para escapar. Encuentra la linterna es tu unica arma ¡Cuidado con los peligros de la oscuridad!";
                 oneShotSource.PlayOneShot(fearSound, 1f);
                 break;

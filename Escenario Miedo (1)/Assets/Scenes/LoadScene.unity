@@ -2072,14 +2072,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383175803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 412}
+  m_LocalPosition: {x: 0, y: 0, z: 603}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1279942448}
   - {fileID: 1285022958}
-  - {fileID: 1770736879}
   - {fileID: 1341822261}
+  - {fileID: 1770736879}
   m_Father: {fileID: 2017857791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3599,8 +3599,8 @@ MonoBehaviour:
   AllowRecenter: 1
   LateControllerUpdate: 1
   LateLatching: 0
-  controllerDrivenHandPosesType: 0
-  SimultaneousHandsAndControllersEnabled: 0
+  controllerDrivenHandPosesType: 1
+  SimultaneousHandsAndControllersEnabled: 1
   _readOnlyWideMotionModeHandPosesEnabled: 0
   wideMotionModeHandPosesEnabled: 0
   dynamicResolutionVersion: 1
@@ -9561,7 +9561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressText: {fileID: 1279942449}
   fadeImage: {fileID: 1770736880}
-  fakeMinimumLoadTime: 8
+  fakeMinimumLoadTime: 6
   instructionText: {fileID: 1285022959}
   nextInstruction: {fileID: 1341822260}
   rotationSpeed: 1
@@ -9569,6 +9569,8 @@ MonoBehaviour:
   fearSound: {fileID: 8300000, guid: ebb46fe18478fe742a5f7a819e6c8add, type: 3}
   wrathSound: {fileID: 8300000, guid: bf2304b964b987444904372a8702b6d5, type: 3}
   happySound: {fileID: 8300000, guid: 8e2dab6e583ed8f499e21ee073e5c4a0, type: 3}
+  musicSource: {fileID: 1741909173}
+  horrorClip: {fileID: 8300000, guid: 300cf0de7a3bc2b4db82e2dc290a34f3, type: 3}
   button_A: {fileID: 1962078481859399738, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!82 &1741909173
 AudioSource:
@@ -9581,11 +9583,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 486c566c463b64c458b9b3a95a815d67, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3216523bf3006bb498693dfd8d5940a4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

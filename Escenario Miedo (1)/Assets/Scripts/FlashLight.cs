@@ -2,6 +2,8 @@ using Oculus.Interaction;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class FlashLight : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class FlashLight : MonoBehaviour
     private bool luzEncendida = false;
     private Grabbable grabbable;
 
+    public InputActionReference A_button;
+
+    //bool de Seleccion objeto
+    private bool isGrabbed = false;
     void Awake()
     {
         render = GetComponent<Renderer>();
@@ -26,46 +32,101 @@ public class FlashLight : MonoBehaviour
         onOffAudioSource.clip = onOffSound;
         onOffAudioSource.loop = false;
         meshConeLigth.SetActive(false);
-        render.materials[0].SetColor("_EmissionColor", emisionColor * 1f);
+        
+
+    }
+    private void OnEnable()
+    {
+        if (grabbable != null)
+        {
+            // Nos suscribimos a los eventos del grabbable
+            grabbable.WhenPointerEventRaised += OnPointerEvent;
+            A_button.action.performed += onPressButton;
+        }
 
     }
 
+    private void OnDisable()
+    {
+        if (grabbable != null)
+        {
+            // Nos suscribimos a los eventos del grabbable
+            grabbable.WhenPointerEventRaised -= OnPointerEvent;
+            A_button.action.performed -= onPressButton;
+        }
+
+    }
+
+    private void onPressButton(InputAction.CallbackContext ctx)
+    {
+        if(isGrabbed)
+        {
+            if (!luzEncendida)
+            {
+                EncenderLinterna();
+            }
+            else {
+                ApagarLinterna();
+            }
+        }
+    }
     void Start()
     {
-
         if (linternaLuz != null)
             linternaLuz.enabled = false;
     }
-    //Update de la linterna
-    void Update()
+    private void OnPointerEvent(PointerEvent evt)
     {
-        logicaLinterna();
-    }
-    
 
-    //Secion de funciones
-    private void logicaLinterna()
-    {
-        // 👉 Detecta si está agarrado con Oculus
-        if (grabbable.SelectingPointsCount > 0) // está agarrado
-        {   
-            // Desactiva la emisión de color blanco 
-            render.materials[0].DisableKeyword("_EMISSION");
-            //Desactiva el outliner del objeto 
-            if (render.materials.Length > 1)
-                render.materials[1].SetFloat("_Outline_Thickness", 0f);
-            if (!luzEncendida)
-                EncenderLinterna();
-        }
-        else
+        if (evt.Type == PointerEventType.Select)
         {
-            render.materials[0].DisableKeyword("_EMISSION");
+            isGrabbed = true;
+            // 👉 Detecta si está agarrado con Oculus
+            if (grabbable.SelectingPointsCount > 0) // está agarrado
+            {
+                //Desactiva el outliner del objeto 
+                if (render.materials.Length > 1)
+                    render.materials[1].SetFloat("_Outline_Thickness", 0f);
+                if (!luzEncendida)
+                    EncenderLinterna();
+            }
+                
+            // vibración corta
+            OVRInput.SetControllerVibration(1f, 0.5f, OVRInput.Controller.RTouch); // Right hand
+            OVRInput.SetControllerVibration(1f, 0.5f, OVRInput.Controller.LTouch); // Left hand
+
+            //Detener después de un tiempo corto
+            Invoke(nameof(StopHaptics), 0.2f);
+        }
+        if (evt.Type == PointerEventType.Unselect)
+        {
+            isGrabbed = false;
             if (render.materials.Length > 1)
                 render.materials[1].SetFloat("_Outline_Thickness", 0.002999999f);
             if (luzEncendida)
                 ApagarLinterna();
         }
 
+    }
+
+    //Update de la linterna
+    void Update()
+    {
+        logicaLinterna();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Battery"))
+        {
+            RechargeBattery(75);
+        }
+    }
+
+
+    //Secion de funciones
+    private void logicaLinterna()
+    {
         // 👉 Drenar batería si está encendida
         if (luzEncendida)
         {
@@ -101,5 +162,10 @@ public class FlashLight : MonoBehaviour
     {
         batteryLife = Mathf.Clamp(batteryLife + amount, 0f, maxBattery);
         Debug.Log("Batería recargada. Nivel actual: " + batteryLife);
+    }
+    private void StopHaptics()
+    {
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
     }
 }

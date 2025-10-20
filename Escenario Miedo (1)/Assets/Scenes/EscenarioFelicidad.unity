@@ -2236,8 +2236,8 @@ MonoBehaviour:
   AllowRecenter: 1
   LateControllerUpdate: 1
   LateLatching: 0
-  controllerDrivenHandPosesType: 0
-  SimultaneousHandsAndControllersEnabled: 0
+  controllerDrivenHandPosesType: 1
+  SimultaneousHandsAndControllersEnabled: 1
   _readOnlyWideMotionModeHandPosesEnabled: 0
   wideMotionModeHandPosesEnabled: 0
   dynamicResolutionVersion: 1
@@ -9760,6 +9760,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4105805283940168, guid: bd1a894f239d58d4dbf63f27e28096bd, type: 3}
   m_PrefabInstance: {fileID: 524003176}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &524944196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524944197}
+  - component: {fileID: 524944198}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524944197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524944196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 164.36, y: 10.5, z: 43.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524944198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524944196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0b8764b2259ab47be3bab168ab0114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 8300000, guid: 88b5006fe63cb574fa879a5d63a39a6f, type: 3}
+  MusicVolumen: 1.022
 --- !u!1 &530978057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5488617562384943283, guid: f47bee7c446f0a9459129aefd30faa00, type: 3}
@@ -46429,3 +46475,4 @@ SceneRoots:
   - {fileID: 513998398}
   - {fileID: 1676887021}
   - {fileID: 1896042078}
+  - {fileID: 524944197}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class AI_Perro_4Puntos : MonoBehaviour
 {
@@ -43,6 +44,14 @@ public class AI_Perro_4Puntos : MonoBehaviour
     [Header("Detection")]
     [Tooltip("Este rango ahora se usa para el audio y para detectar pelotas lanzadas.")]
     public float detectionRange = 20f;
+
+    // --- ¡NUEVAS VARIABLES DE AUDIO! ---
+    [Tooltip("Lista de sonidos (ladridos, llantos) que el perro hará aleatoriamente.")]
+    public AudioClip[] randomSounds;
+    [Tooltip("El tiempo mínimo en segundos que esperará el perro antes de hacer otro sonido aleatorio.")]
+    public float minRandomSoundWait = 5.0f;
+    [Tooltip("El tiempo máximo en segundos que esperará el perro antes de hacer otro sonido aleatorio.")]
+    public float maxRandomSoundWait = 20.0f;
 
     // Componentes y estado interno
     private Rigidbody rb;
@@ -122,6 +131,38 @@ public class AI_Perro_4Puntos : MonoBehaviour
         currentState = DogState.Patrolling;
         currentPatrolIndex = 0;
         currentTarget = patrolPoints[currentPatrolIndex];
+
+        // ¡NUEVO! Iniciamos la rutina de sonidos aleatorios en cuanto empieza el juego.
+        StartCoroutine(RandomSoundRoutine());
+    }
+
+    // --- ¡NUEVA FUNCIÓN (CORRUTINA)! ---
+    private IEnumerator RandomSoundRoutine()
+    {
+        Debug.Log("Rutina de sonidos aleatorios INICIADA.");
+        while (true)
+        {
+            float waitTime = Random.Range(minRandomSoundWait, maxRandomSoundWait);
+            Debug.Log($"Próximo sonido aleatorio en {waitTime} segundos...");
+            yield return new WaitForSeconds(waitTime);
+
+            // --- Comprobaciones con mensajes de error ---
+            if (interactionAudioSource == null)
+            {
+                Debug.LogError("¡ERROR DE AUDIO! El 'Interaction Audio Source' no está asignado en el Inspector.");
+                continue; // Salta esta vez y vuelve a intentarlo más tarde
+            }
+            if (randomSounds == null || randomSounds.Length == 0)
+            {
+                Debug.LogError("¡ERROR DE AUDIO! La lista 'Random Sounds' está vacía. Asigna los clips de audio en el Inspector.");
+                continue;
+            }
+            
+            // Si todo está bien, reproduce el sonido
+            AudioClip clipToPlay = randomSounds[Random.Range(0, randomSounds.Length)];
+            Debug.Log($"Reproduciendo sonido aleatorio: {clipToPlay.name}");
+            interactionAudioSource.PlayOneShot(clipToPlay);
+        }
     }
 
     // Se llama cuando se presiona el botón asignado

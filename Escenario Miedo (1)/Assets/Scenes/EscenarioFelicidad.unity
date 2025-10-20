@@ -17183,7 +17183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4796670359222672, guid: d354bbf6d0a7bc543b86d5b1337c7933, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.227
+      value: 24.323
       objectReference: {fileID: 0}
     - target: {fileID: 4796670359222672, guid: d354bbf6d0a7bc543b86d5b1337c7933, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17191,7 +17191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4796670359222672, guid: d354bbf6d0a7bc543b86d5b1337c7933, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.066
+      value: 7.081
       objectReference: {fileID: 0}
     - target: {fileID: 4796670359222672, guid: d354bbf6d0a7bc543b86d5b1337c7933, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17439,6 +17439,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7dca68918011bd644a4dc268eea79b44, type: 3}
+--- !u!1 &916437283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1315125114229348, guid: 4c1686a5131ac8b45bfe913f509289c0, type: 3}
+  m_PrefabInstance: {fileID: 1996233453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &916437287
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916437283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 16c4b1c9bf28bc44eab122106a0e4864, type: 3}
 --- !u!1 &917333802
 GameObject:
   m_ObjectHideFlags: 0
@@ -20190,7 +20217,14 @@ MonoBehaviour:
   followWaitTime: 1
   fetchWaitTime: 1
   detectionRange: 30
-  audioSourceArray: []
+  randomSounds:
+  - {fileID: 8300000, guid: 0f8c1edbe8690f34fb9b076ffdec0c66, type: 3}
+  - {fileID: 8300000, guid: 0e0611679e40797448b7e77b18a2b076, type: 3}
+  minRandomSoundWait: 5
+  maxRandomSoundWait: 10
+  audioSourceArray:
+  - {fileID: 0}
+  - {fileID: 0}
   walkAudioSource: {fileID: 1048079908}
   interactionAudioSource: {fileID: 1048079907}
   whistleSound: {fileID: 8300000, guid: b9dce575d5a10384c84143547c3ec074, type: 3}
@@ -39448,7 +39482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6faca2276b1ac145b299f923079f846, type: 2}
+  - {fileID: 2100000, guid: aa56abd6f23ddc84ab69ce3e4545cd4d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39487,7 +39521,7 @@ Transform:
   m_GameObject: {fileID: 1896042070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.6488506, z: 0, w: 0.7609159}
-  m_LocalPosition: {x: 93.189995, y: 22.824003, z: 43.767002}
+  m_LocalPosition: {x: 93.285995, y: 22.824003, z: 43.782}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -41955,7 +41989,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1315125114229348, guid: 4c1686a5131ac8b45bfe913f509289c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 916437287}
   m_SourcePrefab: {fileID: 100100000, guid: 4c1686a5131ac8b45bfe913f509289c0, type: 3}
 --- !u!1001 &1997119780
 PrefabInstance:
@@ -43075,6 +43112,7 @@ GameObject:
   - component: {fileID: 2066337541}
   - component: {fileID: 2066337543}
   - component: {fileID: 2066337542}
+  - component: {fileID: 2066337544}
   m_Layer: 0
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
@@ -43161,6 +43199,22 @@ MonoBehaviour:
   _movementProvider: {fileID: 0}
   _handAligment: 0
   _handGrabPoses: []
+--- !u!114 &2066337544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066337540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b2e578cb3cf6c43aad5941e693e4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationAmplitude: 0.5
+  vibrationFrequency: 1
+  vibrationDuration: 0.1
+  vibrationClip: {fileID: 0}
 --- !u!1001 &2068403156
 PrefabInstance:
   m_ObjectHideFlags: 0

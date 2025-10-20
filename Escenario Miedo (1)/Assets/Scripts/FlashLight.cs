@@ -1,5 +1,6 @@
 using Oculus.Interaction;
 using System.Drawing;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,14 +14,25 @@ public class FlashLight : MonoBehaviour
     public float batteryLife = 200f;
     public float batteryDrainRate = 2.2f;
     public float maxBattery = 300f;
-    public AudioClip onOffSound;
+    
     public GameObject meshConeLigth;
     public UnityEngine.Color emisionColor = UnityEngine.Color.white;
     private AudioSource onOffAudioSource;
     private bool luzEncendida = false;
     private Grabbable grabbable;
 
+
+    //Sounds
+    [Header("EffectSunds")]
+    public AudioClip recarghSound;
+    public AudioClip onOffSound;
+
+    [Header("Input Reference")]
     public InputActionReference A_button;
+
+
+    [Header("Battery Check")]
+    public TextMeshProUGUI batteryStateText;
 
     //bool de Seleccion objeto
     private bool isGrabbed = false;
@@ -32,7 +44,8 @@ public class FlashLight : MonoBehaviour
         onOffAudioSource.clip = onOffSound;
         onOffAudioSource.loop = false;
         meshConeLigth.SetActive(false);
-        
+        batteryStateText.enabled = false;
+
 
     }
     private void OnEnable()
@@ -115,14 +128,15 @@ public class FlashLight : MonoBehaviour
         logicaLinterna();
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.CompareTag("Battery"))
+        if (other.CompareTag("Battery"))
         {
             RechargeBattery(75);
+            other.gameObject.SetActive(false);
         }
     }
-
 
     //Secion de funciones
     private void logicaLinterna()
@@ -133,24 +147,29 @@ public class FlashLight : MonoBehaviour
             batteryLife -= batteryDrainRate * Time.deltaTime;
             if (batteryLife <= 0)
             {
+                
                 batteryLife = 0;
                 ApagarLinterna();
             }
+            batteryStateText.text = "Battery: " + batteryLife;
         }
     }
     private void EncenderLinterna()
     {
         if (batteryLife > 0)
         {
+            batteryStateText.enabled = true;
             onOffAudioSource.Play();
             luzEncendida = true;
             linternaLuz.enabled = true;
             meshConeLigth.SetActive(true);
+            
         }
     }
 
     private void ApagarLinterna()
     {
+        batteryStateText.enabled = false;
         onOffAudioSource.Play();
         luzEncendida = false;
         meshConeLigth.SetActive(false);
@@ -160,6 +179,7 @@ public class FlashLight : MonoBehaviour
 
     public void RechargeBattery(float amount = 50f)
     {
+        onOffAudioSource.PlayOneShot(recarghSound, 1f);
         batteryLife = Mathf.Clamp(batteryLife + amount, 0f, maxBattery);
         Debug.Log("Batería recargada. Nivel actual: " + batteryLife);
     }

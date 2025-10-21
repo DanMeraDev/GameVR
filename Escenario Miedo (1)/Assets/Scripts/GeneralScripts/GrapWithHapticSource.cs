@@ -1,14 +1,12 @@
-using Oculus.Haptics;
 using Oculus.Interaction;
 using Oculus.Interaction.Input;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Unity.VisualScripting;
 
 public class GrapWithHapticSource : MonoBehaviour
 {
-    private GrabInteractable grabInteractable;
+    private HandGrabInteractable grabInteractable;
     [Header("Configuración de Vibración")]
     [Tooltip("Intensidad de la vibración (0 a 1).")]
     [Range(0f, 1f)]
@@ -27,15 +25,18 @@ public class GrapWithHapticSource : MonoBehaviour
     private void Awake()
     {
 
-        grabInteractable= GetComponent<GrabInteractable>();
+        grabInteractable = GetComponent<HandGrabInteractable>();
+        Debug.Log("Haz clic aquí para seleccionar el objeto interactor:", grabInteractable.gameObject);
         vibrationSource = this.transform.AddComponent<AudioSource>();
 
     }
 
     private void OnEnable()
     {
+        Debug.Log("GrabInteractable asignado: " + grabInteractable);
         grabInteractable.WhenSelectingInteractorAdded.Action += onInteraction;
-      //  grabbable.WhenSelectingInteractorAdded += OnGrabbed;
+        Debug.Log(grabInteractable.WhenSelectingInteractorAdded.GetType());
+        //  grabbable.WhenSelectingInteractorAdded += OnGrabbed;
 
     }
 
@@ -45,7 +46,7 @@ public class GrapWithHapticSource : MonoBehaviour
         grabInteractable.WhenSelectingInteractorAdded.Action -= onInteraction;
 
     }
-    private void onInteraction(GrabInteractor interactor)
+    private void onInteraction(HandGrabInteractor interactor)
     {
         Debug.Log("Log intro");
         var interactorMono = interactor as MonoBehaviour;

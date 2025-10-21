@@ -72,6 +72,7 @@ public class FlashLight : MonoBehaviour
 
     private void onPressButton(InputAction.CallbackContext ctx)
     {
+        Debug.Log("ON por botton");
         if(isGrabbed)
         {
             if (!luzEncendida)

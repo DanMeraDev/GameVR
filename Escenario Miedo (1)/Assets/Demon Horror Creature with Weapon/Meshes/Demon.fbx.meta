@@ -331,7 +331,7 @@ ModelImporter:
       name: Demon|Punch1
       takeName: Demon|Punch1
       internalID: 5825753709171574083
-      firstFrame: 0
+      firstFrame: 100
       lastFrame: 121
       wrapMode: 0
       orientationOffsetY: 0
@@ -351,7 +351,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.26433566
+        functionName: HitEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

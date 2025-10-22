@@ -22,6 +22,7 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
     [Header("Attack Settings")]
     public float attackCooldown = 1.5f; // Tiempo en segundos entre cada golpe
     private float lastAttackTime = -99f;
+    private PlayerHealth targetPlayerHealth; // Guardará al jugador que estamos atacando
 
     // Componentes y estado interno
     private Rigidbody rb;
@@ -254,20 +255,37 @@ public class AI_Enemigo_SinNavMesh : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (GameObject.Find("IndicadorDaño") != null)
+        // Comprobamos si es el jugador y si el cooldown ha pasado
+        if (collision.gameObject.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
         {
-            // Comprobamos si hemos chocado con el jugador Y si ha pasado el tiempo de cooldown.
-            if (collision.gameObject.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
+            // 1. Guardamos una referencia al script de vida del jugador
+            targetPlayerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+            // 2. Si el jugador es válido (tiene el script)...
+            if (targetPlayerHealth != null)
             {
-                // Intentamos obtener el script de vida del objeto con el que chocamos.
-                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    Debug.Log("Enemigo ha golpeado al jugador.");
-                    playerHealth.TakeDamage(1); // Le quitamos 1 punto de vida
-                    lastAttackTime = Time.time; // Reseteamos el contador del cooldown
-                }
+                // 3. Reseteamos el cooldown para que no vuelva a atacar inmediatamente
+                lastAttackTime = Time.time;
+
+                // 4. Activamos el trigger de la animación
+                animator.SetTrigger("Attack");
             }
+        }
+    }
+
+    public void HitEvent()
+    {
+        // Comprobamos si tenemos un objetivo guardado
+        if (targetPlayerHealth != null)
+        {
+            Debug.Log("Evento de Animación: ¡Golpe conectado!");
+
+            // Aplicamos el daño
+            targetPlayerHealth.TakeDamage(1);
+
+            // Limpiamos el objetivo para no golpearlo dos veces
+            // si la animación tuviera dos eventos por error.
+            targetPlayerHealth = null;
         }
     }
 }

@@ -88,7 +88,7 @@ public class VRLoadingScreen : MonoBehaviour
             case 1:
                 musicSource.clip = horrorClip;
                 musicSource.Play();
-                instructionText.text = "Encuentra las llaves de colores y úsalas en los lectores correspondientes para abrir las puertas. Halla la llave del pasillo final para escapar. Encuentra la linterna es tu unica arma ¡Cuidado con los peligros de la oscuridad!";
+                instructionText.text = "Encuentra las llaves de colores y úsalas en los lectores correspondientes para abrir las puertas. Halla la llave del pasillo final para escapar. Encuentra la linterna es tu unica arma, considera que su bateráa es limitada, puedes ahorrar batería aplastando el boton B,\n ¡Cuidado con los peligros de la oscuridad!";
                 oneShotSource.PlayOneShot(fearSound, 1f);
                 break;
             case 2:
@@ -96,7 +96,7 @@ public class VRLoadingScreen : MonoBehaviour
                 oneShotSource.PlayOneShot(wrathSound, 1f);
                 break;
             case 3:
-                instructionText.text = "Explorador, en este escenario seras recompensado por ser feliz con tu compañero";
+                instructionText.text = "Explorador, en este escenario seras recompensado por ser feliz con tu compañero, llamalo utilizando el boton B";
                 oneShotSource.PlayOneShot(happySound, 1f);
                 break;
         }

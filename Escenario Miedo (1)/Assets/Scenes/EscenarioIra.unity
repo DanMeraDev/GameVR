@@ -3202,7 +3202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1477c89c2224f47a038dc04ade77e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPosition: {fileID: 0}
+  playerPosition: {fileID: 366941558}
   ballPosition: {fileID: 20074162}
   Stickwork: {fileID: 528528199}
   Stickwork2: {fileID: 488649108}

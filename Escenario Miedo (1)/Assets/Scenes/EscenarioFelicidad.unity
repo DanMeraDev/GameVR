@@ -12828,6 +12828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 8300000, guid: 88b5006fe63cb574fa879a5d63a39a6f, type: 3}
   MusicVolumen: 0.37
+  ball: {fileID: 1896042070}
 --- !u!1 &530978057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5488617562384943283, guid: f47bee7c446f0a9459129aefd30faa00, type: 3}
@@ -19031,48 +19032,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4063210846265680, guid: 186ecc7a1f977cc4fab5658c00fa3c4d, type: 3}
   m_PrefabInstance: {fileID: 811794493}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &811851571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Material: {fileID: 0}
-  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  NameTextureParameter_baseColorTexture: _MainTex
-  NameTextureParameter_diffuseTexture: _MainTex
-  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
-  NameTextureParameter_specularGlossiness: _Specular
-  NameTextureParameter_normalTexture: _BumpMap
-  NameTextureParameter_occlusionTexture: _OcclusionMap
-  NameTextureParameter_emissiveTexture: _EmissiveMap
-  NameTextureParameter_flowTexture: _FlowMap
-  NameColorParameter_BaseColorFactor: _Color
-  UseColorParameter_BaseColorFactor: 0
-  NameFloatParameter_MetallicFactor: _Metallic
-  UseFloatParameter_MetallicFactor: 0
-  NameFloatParameter_RoughnessFactor: _Roughness
-  UseFloatParameter_RoughnessFactor: 0
-  NameColorParameter_DiffuseFactor: _Diffuse
-  UseColorParameter_DiffuseFactor: 0
-  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
-  Texture_SSSCurvatureTexture: {fileID: 0}
-  NameTextureParameter_SSSZHTexture: _SSSZHLUT
-  Texture_SSSZHTexture: {fileID: 0}
-  KeywordsEnumerations: []
-  KeywordsToEnable: []
-  NameFloatConstants: []
-  ValueFloatConstants: []
-  ExtensionConfiguration:
-    _extensionNames: []
-    _entryNamesPerExtension: []
-    _replacementNamesPerExtension: []
 --- !u!1 &812699469 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1069567032315564, guid: bdf8e7438a7816543998181bd3067573, type: 3}
@@ -21075,6 +21034,48 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8256052390180630127, guid: b77da4f016c6e22418c989a19bf3ba6c, type: 3}
+--- !u!114 &903309010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3861555276e1a07489d3c0971e091e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 0}
+  Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  NameTextureParameter_baseColorTexture: _MainTex
+  NameTextureParameter_diffuseTexture: _MainTex
+  NameTextureParameter_metallicRoughnessTexture: _MetallicGlossMap
+  NameTextureParameter_specularGlossiness: _Specular
+  NameTextureParameter_normalTexture: _BumpMap
+  NameTextureParameter_occlusionTexture: _OcclusionMap
+  NameTextureParameter_emissiveTexture: _EmissiveMap
+  NameTextureParameter_flowTexture: _FlowMap
+  NameColorParameter_BaseColorFactor: _Color
+  UseColorParameter_BaseColorFactor: 0
+  NameFloatParameter_MetallicFactor: _Metallic
+  UseFloatParameter_MetallicFactor: 0
+  NameFloatParameter_RoughnessFactor: _Roughness
+  UseFloatParameter_RoughnessFactor: 0
+  NameColorParameter_DiffuseFactor: _Diffuse
+  UseColorParameter_DiffuseFactor: 0
+  NameTextureParameter_SSSCurvatureTexture: _SSSCurvatureLUT
+  Texture_SSSCurvatureTexture: {fileID: 0}
+  NameTextureParameter_SSSZHTexture: _SSSZHLUT
+  Texture_SSSZHTexture: {fileID: 0}
+  KeywordsEnumerations: []
+  KeywordsToEnable: []
+  NameFloatConstants: []
+  ValueFloatConstants: []
+  ExtensionConfiguration:
+    _extensionNames: []
+    _entryNamesPerExtension: []
+    _replacementNamesPerExtension: []
 --- !u!1001 &908110639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21635,6 +21636,75 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 287625791958464770, guid: 8973d278752e1ac44a8f392b039ad7dd, type: 3}
   m_PrefabInstance: {fileID: 2129419632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &938027285
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 19.029045
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 19.029045
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 19.029045
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 93.19
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.637
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4895171
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000018478762
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8719937
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00000003291685
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 121.382
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
+      propertyPath: m_Name
+      value: SignRampGrap
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 682846ab1213a9f4991c71844b657bd8, type: 3}
 --- !u!1 &938136717
 GameObject:
   m_ObjectHideFlags: 0
@@ -33212,6 +33282,10 @@ PrefabInstance:
       propertyPath: _ovrCameraRig
       value: 
       objectReference: {fileID: 1896191919}
+    - target: {fileID: 7218948594749983592, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: _maxSlopeAngle
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7904225791563683334, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -58174,3 +58248,4 @@ SceneRoots:
   - {fileID: 1917097115}
   - {fileID: 1915312383}
   - {fileID: 2060291742}
+  - {fileID: 938027285}

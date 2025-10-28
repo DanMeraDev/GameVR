@@ -10,7 +10,7 @@ public class labetrinthScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "BallTest" && gameManager!= null)
+        if((other.name == "BallTest" || other.name == "Ball") && gameManager!= null)
         {
             Debug.Log("Entró: " + other.name);
             gameManager.respawnBall(other);
@@ -20,7 +20,7 @@ public class labetrinthScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "BallTest" && gameManager != null)
+        if ((other.name == "BallTest" || other.name == "Ball") && gameManager != null)
         {
             Debug.Log("Salio: " + other.name);
         }

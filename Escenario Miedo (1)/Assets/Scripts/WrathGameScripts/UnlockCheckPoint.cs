@@ -23,7 +23,7 @@ public class UnlockCheckPoint : MonoBehaviour
         if (other.CompareTag("Player") && obstacle!=null)
         {
             checkpointEffect.Play();
-            obstacle.SetActive(false);
+            obstacle.SetActive(true);
 
         }
 

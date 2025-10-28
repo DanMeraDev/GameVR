@@ -1,4 +1,4 @@
-using Oculus.Interaction.Samples;
+Ôªøusing Oculus.Interaction.Samples;
 using System.Collections;
 using System.Linq;
 using System.Threading;
@@ -19,7 +19,7 @@ public class VRLoadingScreen : MonoBehaviour
     public GameObject nextInstruction;
 
     [Header("Controles del Skymap")]
-    [Tooltip("Velocidad de rotaciÛn en grados por segundo")]
+    [Tooltip("Velocidad de rotaci√≥n en grados por segundo")]
     public float rotationSpeed = 1.0f;
     [Tooltip("Tiempo que tarda el fade a negro")]
     public float fadeDuration = 1.0f;
@@ -44,7 +44,7 @@ public class VRLoadingScreen : MonoBehaviour
     private AsyncOperation asyncLoad;
     private void Awake()
     {
-        //Source del sonido de InstrucciÛn
+        //Source del sonido de Instrucci√≥n
         oneShotSource = this.transform.AddComponent<AudioSource>();
         if (nextInstruction != null)
         {
@@ -59,7 +59,7 @@ public class VRLoadingScreen : MonoBehaviour
             button_A.action.Enable();
             //Subscripcion al evento mediante enable
             button_A.action.performed += onContinue;
-            Debug.Log($"BotÛn A habilitado con binding: {string.Join(", ", button_A.action.bindings.Select(b => b.effectivePath))}");
+            Debug.Log($"Bot√≥n A habilitado con binding: {string.Join(", ", button_A.action.bindings.Select(b => b.effectivePath))}");
         }
     }
 
@@ -88,15 +88,15 @@ public class VRLoadingScreen : MonoBehaviour
             case 1:
                 musicSource.clip = horrorClip;
                 musicSource.Play();
-                instructionText.text = "Encuentra las llaves de colores y ˙salas en los lectores correspondientes para abrir las puertas. Halla la llave del pasillo final para escapar. Encuentra la linterna es tu unica arma, considera que su bater·a es limitada, puedes ahorrar baterÌa aplastando el boton B,\n °Cuidado con los peligros de la oscuridad!";
+                instructionText.text = "Encuentra las llaves de colores y √∫salas en los lectores correspondientes para abrir las puertas.\r\nHalla la llave del pasillo final para escapar.\r\n\r\nBusca la linterna, es tu √∫nica arma. Su bater√≠a es limitada, pero puedes ahorrar energ√≠a presionando el bot√≥n B.\r\n\r\n‚ö† ¬°Cuidado con los peligros de la oscuridad!";
                 oneShotSource.PlayOneShot(fearSound, 1f);
                 break;
             case 2:
-                instructionText.text = "Explorador mueve la pelota hacia una plataforma con trofeo para ganar, pero recuerda en este mundo tu traje tiene falla de teleporte, por lo que no puedes interactuar directamente con la pelota";
+                instructionText.text = "Objetivo: mueve la pelota hacia la plataforma con el trofeo.\r\nAtenci√≥n: debido a una falla en tu traje de teletransporte, no puedes tocar la pelota directamente. Usa el entorno para lograrlo.";
                 oneShotSource.PlayOneShot(wrathSound, 1f);
                 break;
             case 3:
-                instructionText.text = "Explorador, en este escenario seras recompensado por ser feliz con tu compaÒero, llamalo utilizando el boton B";
+                instructionText.text = "Explorador, en este escenario ser√°s recompensado por compartir la felicidad con tu compa√±ero.\r\nLl√°malo presionando el bot√≥n B y juntos podr√°n jugar con una pelota.";
                 oneShotSource.PlayOneShot(happySound, 1f);
                 break;
         }
@@ -139,7 +139,7 @@ public class VRLoadingScreen : MonoBehaviour
             yield return null;
   
         }
-        // La carga terminÛ, ahora muestra la instrucciÛn para continuar
+        // La carga termin√≥, ahora muestra la instrucci√≥n para continuar
         if (progressText != null)
             progressText.text = "Carga completa";
         if (nextInstruction != null)
@@ -147,7 +147,7 @@ public class VRLoadingScreen : MonoBehaviour
     }
     IEnumerator FadeAndActivateScene()
     {
-        // Desuscribirse del eventsystem para evitar doble pulsaciÛn
+        // Desuscribirse del eventsystem para evitar doble pulsaci√≥n
         button_A.action.performed -= onContinue;
 
         // Comienza el fade a negro

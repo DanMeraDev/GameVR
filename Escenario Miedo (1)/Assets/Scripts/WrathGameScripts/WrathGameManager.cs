@@ -147,11 +147,20 @@ public class WrathGameManager : MonoBehaviour
     public void respawnBall(Collider other)
     {
         
-        Rigidbody rb= other.gameObject.GetComponent<Rigidbody>();
-        
-        ballPosition.position = respawnPointBall;
+        Rigidbody rb = other.attachedRigidbody;
+        if (rb != null)
+        {
+            // Desactivar la física momentáneamente para evitar movimientos bruscos
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
-        effectSoundSource.PlayOneShot(LaugthSound, laughVolume);
+            // Reposicionar la pelota
+            rb.transform.position = respawnPointBall;
+
+
+            // Reproducir el efecto de sonido de risa
+            effectSoundSource.PlayOneShot(LaugthSound, laughVolume);
+        }
 
     }
 }

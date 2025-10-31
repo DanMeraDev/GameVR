@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Blue_Concrete_Wall 3
+  m_Name: OxideTexture
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 923ca7826b33dac4e9849d2c6e5b3169, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -44,19 +44,21 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f638254f1c8822545b7b61eab477ed26, type: 3}
-        m_Scale: {x: 0.4, y: 0.4}
+        m_Texture: {fileID: 2800000, guid: 6dd38031f452cae439e4b0ff3f577d3f, type: 3}
+        m_Scale: {x: 0.22, y: 0.4}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f638254f1c8822545b7b61eab477ed26, type: 3}
-        m_Scale: {x: 0.4, y: 0.4}
+        m_Texture: {fileID: 2800000, guid: 6dd38031f452cae439e4b0ff3f577d3f, type: 3}
+        m_Scale: {x: 0.22, y: 0.4}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Smoothness: 0.357
+    - _OcclusionStrength: 1
+    - _Parallax: 0.0083
+    - _Smoothness: 0.821
     m_Colors:
-    - _BaseColor: {r: 0.8679245, g: 0.06959773, b: 0.11951599, a: 1}
-    - _Color: {r: 0.8679245, g: 0.069597706, b: 0.11951596, a: 1}
+    - _BaseColor: {r: 0.3018868, g: 0.29387173, b: 0.29191884, a: 1}
+    - _Color: {r: 0.30188674, g: 0.2938717, b: 0.2919188, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
